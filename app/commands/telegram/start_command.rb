@@ -3,7 +3,7 @@ module Telegram
     def execute
       reply_text "Hello #{message.from.first_name}"
       
-      tmpUser = TelegramUser.create(
+      tmp_user = TelegramUser.create(
       	:telegram_chat_id => message.chat.id,
       	:telegram_user_id => message.from.id,
     		:first_name => message.from.first_name,

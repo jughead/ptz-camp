@@ -26,10 +26,12 @@ gem 'devise'
 
 # Adding bootstrap as we are lazy and non-frontend guys
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'telegram-bot-ruby'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'dotenv-rails'
 end
 
 group :development do

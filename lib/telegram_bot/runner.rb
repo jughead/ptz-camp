@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+a# frozen_string_literal: true
 require 'telegram/bot'
 module TelegramBot
   class Request < Struct.new(:runner, :message)
@@ -33,7 +33,7 @@ module TelegramBot
 
     def initialize
       config = Rails.application.secrets
-      @token = config.telegram_bot_api_token      
+      @token = config.telegram_bot_api_token
       @routes = Hash.new
       @logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
     end

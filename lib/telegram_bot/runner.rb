@@ -34,6 +34,7 @@ module TelegramBot
     def initialize
       config = Rails.application.secrets
       @token = config.telegram_bot_api_token
+      log_info config.telegram_bot_api_token.to_s 
       @routes = Hash.new
       @logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
     end

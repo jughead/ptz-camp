@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 require 'telegram/bot'
 module TelegramBot
-  class Request < Struct.new(:runner, :request_message)
+  class Request < Struct.new(:runner, :message)
     def reply_text(message)
       reply(text: message)
     end
 
-    def reply(message)
-      runner.reply(request_message, message)
+    def reply(data)
+      runner.reply(message, data)
     end
 
     delegate :log_info, :log_debug, :log_warn, to: :runner
@@ -20,19 +20,33 @@ module TelegramBot
       self.instance.run
     end
 
-    def self.on(message, &block)
-      self.instance.on(message, &block)
+    def self.on(message, *args)
+      if block_given?
+        self.instance.on(message, Proc.new)
+      else
+        self.instance.on(message, args.first)
+      end
+      self
     end
 
+    attr_accessor :logger
+
     def initialize
-      config = Rails.application.config.secrets
+      config = Rails.application.secrets
       @token = config.telegram_bot_api_token
       @routes = Hash.new
-      @logger = Rails.logger
+      @logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
+    end
+
+    def load_routes
+      log_info 'Loading telegram routes'
+      load "#{Rails.root}/config/telegram_routes.rb"
     end
 
     def run
-      Telegram::Bot::Client.run(@token) do |bot|
+      log_info 'Starting Telegram bot API'
+      load_routes
+      Telegram::Bot::Client.run(@token, logger: @logger) do |bot|
         @bot = bot
         bot.listen do |message|
           route_message(message)
@@ -46,31 +60,39 @@ module TelegramBot
       @bot.api.send_message(chat_id: chat_id, **answer)
     end
 
-    def on(message, &block)
-      @routes[message] = block
+    def log_info(message)
+      log(:info, message)
+    end
+
+    def log_debug(message)
+      log(:debug, message)
+    end
+
+    def log_warn(message)
+      log(:warn, message)
+    end
+
+    def on(message, cb)
+      @routes[message] = cb
     end
 
     private
 
       def route_message(message)
-        log_info "Got message: #{message.truncate(length: 30)}"
-        if @routes.has_key?(message)
-          @routes[message].call(Request.new(self, message))
-        else
-          log_warn "Cannot route the message: #{message.truncate(length: 30)}"
+        text = message.text
+        unless @routes.has_key?(text)
+          log_warn "Cannot route the message: #{text.truncate(30)}"
+          return
         end
-      end
 
-      def log_info(message)
-        log(:info, message)
-      end
+        cb = @routes[text]
+        cb = if cb.is_a?(Symbol)
+          "Telegram::#{cb.to_s.classify}Command".constantize
+        else
+          cb
+        end
 
-      def log_debug(message)
-        log(:debug, message)
-      end
-
-      def log_warn(message)
-        log(:warn, message)
+        cb.call(Request.new(self, message))
       end
 
       def log(level, message)

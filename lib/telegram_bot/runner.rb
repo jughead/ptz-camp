@@ -1,4 +1,4 @@
-a# frozen_string_literal: true
+# frozen_string_literal: true
 require 'telegram/bot'
 module TelegramBot
   class Request < Struct.new(:runner, :message)

@@ -1,6 +1,19 @@
 # frozen_string_literal: true
 require 'telegram/bot'
 module TelegramBot
+  def self.api_token
+    Rails.application.secrets.telegram_bot_api_token
+  end
+
+  def self.api
+    ::TelegramBot::MUTEX.synchronize do
+      unless @api
+        @api = Telegram::Bot::Api.new(api_token)
+      end
+      @api
+    end
+  end
+
   class Request < Struct.new(:runner, :message)
     def reply_text(message)
       reply(text: message)
@@ -32,8 +45,7 @@ module TelegramBot
     attr_accessor :logger
 
     def initialize
-      config = Rails.application.secrets
-      @token = config.telegram_bot_api_token
+      @token = TelegramBot.api_token
       @routes = Hash.new
       @logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
     end
@@ -80,6 +92,11 @@ module TelegramBot
 
       def route_message(message)
         text = message.text
+        unless text
+          log_info "Skipping the message as there is no text in it"
+          return
+        end
+
         unless @routes.has_key?(text)
           log_warn "Cannot route the message: #{text.truncate(30)}"
           return

@@ -10,12 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170121200335) do
+ActiveRecord::Schema.define(version: 20170124214840) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
-  enable_extension "pg_trgm"
+
+  create_table "messages", force: :cascade do |t|
+    t.integer  "user_id"
+    t.text     "text"
+    t.jsonb    "options"
+    t.datetime "processed_at"
+    t.integer  "sent",                default: 0, null: false
+    t.integer  "notifications_count", default: 0, null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "message_id"
+    t.integer  "telegram_user_id"
+    t.datetime "sent_at"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["message_id", "telegram_user_id"], name: "index_notifications_on_message_id_and_telegram_user_id", unique: true, using: :btree
+    t.index ["message_id"], name: "index_notifications_on_message_id", using: :btree
+    t.index ["telegram_user_id"], name: "index_notifications_on_telegram_user_id", using: :btree
+  end
 
   create_table "telegram_users", force: :cascade do |t|
     t.integer  "telegram_chat_id"

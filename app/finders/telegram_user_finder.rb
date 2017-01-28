@@ -17,7 +17,9 @@ class TelegramUserFinder < BaseFinder
   end
 
   def create_or_update
-    assign_attributes(find) || build
+    object = assign_attributes(find) || build
+    object.save
+    object
   end
 
   def build

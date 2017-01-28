@@ -15,4 +15,8 @@ class Message < ApplicationRecord
   def sent?
     processed? && sent == notifications_count
   end
+
+  def sent
+    super || 0
+  end
 end

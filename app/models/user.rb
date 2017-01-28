@@ -10,10 +10,10 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
 
   def admin?
-    self.has_role?(:admin)
+    has_role?(:admin)
   end
 
   def assign_default_role
-    self.add_role(:user) if self.roles.blank?
+    add_role(:user) if roles.blank?
   end
 end

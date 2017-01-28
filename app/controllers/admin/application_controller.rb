@@ -6,7 +6,6 @@ class Admin::ApplicationController < ApplicationController
   private
 
     def authorize
-      # current_user.has_role?(:admin)
       unless current_user.admin?
         redirect_to root_path, status: 403, notice: 'Please, sign in'
       end

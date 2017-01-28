@@ -4,10 +4,16 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  rolify
+  after_create :assign_default_role
+
   has_many :messages, dependent: :destroy
 
   def admin?
-    # TODO: add some roles (gem rolify?)
-    id == 1
+    self.has_role?(:admin)
+  end
+
+  def assign_default_role
+    self.add_role(:user) if self.roles.blank?
   end
 end

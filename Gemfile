@@ -27,6 +27,9 @@ gem 'sidekiq'
 gem 'sinatra', github: 'sinatra', require: false
 gem 'simple_form'
 
+# Be actress	
+gem "rolify"
+
 # Adding bootstrap as we are lazy and non-frontend guys
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'telegram-bot-ruby'

@@ -1,0 +1,6 @@
+<%= simple_form_for @camp, url: (@camp.persisted? ? admin_camp_path(@camp) : admin_camps_path) do |f| %>
+  <%= f.input :title %>
+  <%= f.input :slug %>
+  <%= f.input :telegram_intro %>
+  <%= f.button :submit %>
+<% end %>

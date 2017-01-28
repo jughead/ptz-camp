@@ -23,6 +23,9 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 gem 'devise'
+gem 'sidekiq'
+gem 'sinatra', github: 'sinatra', require: false
+gem 'simple_form'
 
 # Adding bootstrap as we are lazy and non-frontend guys
 gem 'bootstrap-sass', '~> 3.3.6'

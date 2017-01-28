@@ -1,0 +1,9 @@
+<%= link_to 'New camp', new_admin_camp_path, class: 'btn btn-primary' %>
+
+<% @camps.each do |camp| %>
+  <div class="row">
+    <div class="col-xs-8">
+      <%= link_to camp.title, edit_admin_camp_path(camp) %>
+    </div>
+  </div>
+<% end %>

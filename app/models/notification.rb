@@ -1,9 +1,8 @@
 class Notification < ApplicationRecord
   belongs_to :message
-  belongs_to :telegram_user
+  belongs_to :recipient, polymorphic: true
 
   validates :message, presence: true
-  validates :telegram_user, presence: true
 
   scope :not_sent, -> { where(sent_at: nil) }
 

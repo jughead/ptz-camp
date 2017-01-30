@@ -8,7 +8,7 @@ module Telegram
         reply_text "Hello #{message.from.first_name}"
       end
 
-      TelegramUserFinder.new.from_tmessage(message).create_or_update
+      RegisterUserOrGroupCommand.new(message).execute
     end
   end
 end

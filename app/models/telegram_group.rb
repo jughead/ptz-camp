@@ -1,0 +1,2 @@
+class TelegramGroup < ApplicationRecord
+end

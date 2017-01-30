@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 require 'telegram/bot'
 module TelegramBot
+  AT = '@'.freeze
+
   def self.api_token
     Rails.application.secrets.telegram_bot_api_token
   end
@@ -12,6 +14,14 @@ module TelegramBot
       end
       @api
     end
+  end
+
+  def self.bot_name
+    Rails.application.secrets.telegram_bot_name
+  end
+
+  def self.in_group_command_regexp
+    @in_group_command_regexp ||= /\/[^@]+@#{bot_name}/
   end
 
   class Request < Struct.new(:runner, :message)
@@ -95,6 +105,10 @@ module TelegramBot
         unless text
           log_info "Skipping the message as there is no text in it"
           return
+        end
+
+        if text =~ TelegramBot.in_group_command_regexp
+          text = text.split(AT).first
         end
 
         unless @routes.has_key?(text)

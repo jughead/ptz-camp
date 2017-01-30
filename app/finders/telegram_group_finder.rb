@@ -1,7 +1,7 @@
 # frozen_string_literal: true
-class TelegramUserFinder < BaseFinder
+class TelegramGroupFinder < BaseFinder
   def model
-    TelegramUser
+    TelegramGroup
   end
 
   def new_model
@@ -22,8 +22,8 @@ class TelegramUserFinder < BaseFinder
   end
 
   def find
-    if private?
-      model.where(telegram_user_id: @message.from.id).first
+    if public?
+      model.where(telegram_chat_id: @message.chat.id).first
     end
   end
 
@@ -39,13 +39,11 @@ class TelegramUserFinder < BaseFinder
 
   def assign_attributes(object)
     return object unless object
-    return if public?
+    return if private?
+    chat = @message.chat
     object.assign_attributes(
-      telegram_user_id: @message.from.id,
-      telegram_chat_id: @message.chat.id,
-      first_name: @message.from.first_name,
-      last_name: @message.from.last_name,
-      username: @message.from.username,
+      telegram_chat_id: chat.id,
+      title: chat.title,
     )
     object
   end

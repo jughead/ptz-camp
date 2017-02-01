@@ -1,8 +1,8 @@
 <div class="col-xs-6 col-xs-offset-3">
-	<%= simple_form_for @camp, url: (@camp.persisted? ? admin_camp_path(@camp) : admin_camps_path) do |f| %>
-	  <%= f.input :title %>
-	  <%= f.input :slug %>
-	  <%= f.input :telegram_intro %>
-	  <%= f.button :submit, class: 'btn btn-primary' %>
-	<% end %>
+  <%= simple_form_for @camp, url: (@camp.persisted? ? admin_camp_path(@camp) : admin_camps_path) do |f| %>
+    <%= f.input :title %>
+    <%= f.input :slug %>
+    <%= f.input :telegram_intro %>
+    <%= f.button :submit, class: 'btn btn-primary' %>
+  <% end %>
 </div>

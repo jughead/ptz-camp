@@ -21,18 +21,18 @@
       </td>
       <td>
         <div class="progress">
-          <div class="progress-bar 
+          <div class="progress-bar
           <% if message.sent? %>
             progress-bar-success
-          <% end %>" 
-          role="progressbar" aria-valuenow="<%= message.sent %>" 
-          aria-valuemin="0" aria-valuemax="<%= message.notifications_count %>" 
+          <% end %>"
+          role="progressbar" aria-valuenow="<%= message.sent %>"
+          aria-valuemin="0" aria-valuemax="<%= message.notifications_count %>"
           style="min-width: 3em; width: <%= 100 * message.sent / [1, message.notifications_count].max %>%;">
             <%= message.sent %> / <%= message.notifications_count %>
           </div>
         </div>
     </td>
-    </tr> 
+    </tr>
   <% end %>
   </tbody>
 </table>

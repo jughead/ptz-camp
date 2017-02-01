@@ -3,9 +3,9 @@
 <hr>
 
 <ul class="list-group">
-<% @camps.each do |camp| %>
-  	<li class="list-group-item" style="text-align: center">
+  <% @camps.each do |camp| %>
+    <li class="list-group-item" style="text-align: center">
       <%= link_to camp.title, edit_admin_camp_path(camp) %>
     </li>
-<% end %>
+  <% end %>
 </ul>

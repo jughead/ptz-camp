@@ -10,7 +10,13 @@
 
   <body>
     <%= render 'layouts/admin_header' %>
-    <%= render 'layouts/flash_messages' %>
-    <%= yield %>
+    <div class="container">
+      <%= render 'layouts/flash_messages' %>
+      <div class="row">
+        <div class="center-block" style="margin: 0 10%;">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

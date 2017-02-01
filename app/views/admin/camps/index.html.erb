@@ -1,9 +1,11 @@
 <%= link_to 'New camp', new_admin_camp_path, class: 'btn btn-primary' %>
 
-<% @camps.each do |camp| %>
-  <div class="row">
-    <div class="col-xs-8">
+<hr>
+
+<ul class="list-group">
+  <% @camps.each do |camp| %>
+    <li class="list-group-item" style="text-align: center">
       <%= link_to camp.title, edit_admin_camp_path(camp) %>
-    </div>
-  </div>
-<% end %>
+    </li>
+  <% end %>
+</ul>

@@ -1,6 +1,6 @@
 class Admin::MessagesController < Admin::ApplicationController
   def index
-    @messages = current_user.messages
+    @messages = current_user.messages.order(created_at: :desc)
   end
 
   def new

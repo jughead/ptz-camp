@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       mount Sidekiq::Web => '/sidekiq'
       resources :messages, only: [:index, :create, :new]
       resources :camps
+      resources :schedule_days
     end
   end
 

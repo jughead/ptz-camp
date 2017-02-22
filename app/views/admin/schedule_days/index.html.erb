@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Schedule Days</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Camp</th>
+      <th>Date</th>
+      <th>Content</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @schedule_days.each do |schedule_day| %>
+      <tr>
+        <td><%= schedule_day.camp.title %></td>
+        <td><%= schedule_day.date %></td>
+        <td><%= schedule_day.content %></td>
+        <td><%= link_to 'Show', admin_schedule_day_path(schedule_day) %></td>
+        <td><%= link_to 'Edit', edit_admin_schedule_day_path(schedule_day) %></td>
+        <td><%= link_to 'Destroy', admin_schedule_day_path(schedule_day), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Schedule Day', new_admin_schedule_day_path %>

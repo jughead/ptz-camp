@@ -1,0 +1,13 @@
+<%= simple_form_for @schedule_day, url: (@schedule_day.persisted? ? admin_schedule_day_path(@schedule_day) : admin_schedule_days_path) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :camp %>
+    <%= f.input :date %>
+    <%= f.input :content %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

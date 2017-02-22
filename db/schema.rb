@@ -10,17 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170222214158) do
+ActiveRecord::Schema.define(version: 20170222221724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "camps", force: :cascade do |t|
-    t.string   "title",          null: false
-    t.string   "slug",           null: false
-    t.text     "telegram_intro", null: false
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.string   "title",                                 null: false
+    t.string   "slug",                                  null: false
+    t.text     "telegram_intro",                        null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.date     "start_date",     default: '2017-01-30'
+    t.date     "finish_date",    default: '2017-02-09'
     t.index ["created_at"], name: "index_camps_on_created_at", using: :btree
     t.index ["slug"], name: "index_camps_on_slug", using: :btree
     t.index ["updated_at"], name: "index_camps_on_updated_at", using: :btree

@@ -1,4 +1,6 @@
 class ScheduleDay < ApplicationRecord
   belongs_to :camp
-  # TODO: add validates
+  validates :content, presence: true
+  validates :date, presence: true
+  validates :camp, presence: true
 end

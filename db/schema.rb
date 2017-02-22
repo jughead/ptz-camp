@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170130143704) do
+ActiveRecord::Schema.define(version: 20170222214158) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(version: 20170130143704) do
     t.index ["created_at"], name: "index_camps_on_created_at", using: :btree
     t.index ["slug"], name: "index_camps_on_slug", using: :btree
     t.index ["updated_at"], name: "index_camps_on_updated_at", using: :btree
+  end
+
+  create_table "day_schedules", force: :cascade do |t|
+    t.integer  "camp_id",    null: false
+    t.date     "date",       null: false
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["camp_id"], name: "index_day_schedules_on_camp_id", using: :btree
   end
 
   create_table "messages", force: :cascade do |t|
@@ -57,6 +66,15 @@ ActiveRecord::Schema.define(version: 20170130143704) do
     t.datetime "updated_at"
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
     t.index ["name"], name: "index_roles_on_name", using: :btree
+  end
+
+  create_table "schedule_days", force: :cascade do |t|
+    t.integer  "camp_id"
+    t.date     "date"
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["camp_id"], name: "index_schedule_days_on_camp_id", using: :btree
   end
 
   create_table "telegram_groups", force: :cascade do |t|
@@ -100,4 +118,6 @@ ActiveRecord::Schema.define(version: 20170130143704) do
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
   end
 
+  add_foreign_key "day_schedules", "camps"
+  add_foreign_key "schedule_days", "camps"
 end

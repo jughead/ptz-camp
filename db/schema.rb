@@ -70,15 +70,6 @@ ActiveRecord::Schema.define(version: 20170222221724) do
     t.index ["name"], name: "index_roles_on_name", using: :btree
   end
 
-  create_table "schedule_days", force: :cascade do |t|
-    t.integer  "camp_id"
-    t.date     "date"
-    t.text     "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["camp_id"], name: "index_schedule_days_on_camp_id", using: :btree
-  end
-
   create_table "telegram_groups", force: :cascade do |t|
     t.bigint   "telegram_chat_id", null: false
     t.string   "title"
@@ -121,5 +112,4 @@ ActiveRecord::Schema.define(version: 20170222221724) do
   end
 
   add_foreign_key "day_schedules", "camps"
-  add_foreign_key "schedule_days", "camps"
 end

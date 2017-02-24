@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(version: 20170222221724) do
     t.text     "telegram_intro",                        null: false
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
-    t.date     "start_date",     default: '2017-01-30'
-    t.date     "finish_date",    default: '2017-02-09'
+    t.date     "start_date",     default: '2017-01-30', null: false
+    t.date     "finish_date",    default: '2017-02-09', null: false
     t.index ["created_at"], name: "index_camps_on_created_at", using: :btree
     t.index ["slug"], name: "index_camps_on_slug", using: :btree
     t.index ["updated_at"], name: "index_camps_on_updated_at", using: :btree

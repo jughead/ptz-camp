@@ -1,4 +1,8 @@
 class Camp < ApplicationRecord
+  has_many :day_schedules, dependent: :destroy
+
+  after_create :create_day_schedules
+
   validates :title, presence: true
   validates :telegram_intro, presence: true
   validates :slug, presence: true, uniqueness: true

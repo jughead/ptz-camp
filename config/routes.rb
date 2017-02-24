@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     namespace :admin do
       mount Sidekiq::Web => '/sidekiq'
       resources :messages, only: [:index, :create, :new]
+      resources :day_schedules, only: [:edit, :update]
       resources :camps
     end
   end

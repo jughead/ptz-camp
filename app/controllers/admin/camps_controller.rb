@@ -13,7 +13,7 @@ class Admin::CampsController < Admin::ApplicationController
   end
 
   def index
-    @camps = Camp.all.order(created_at: :desc)
+    @camps = Camp.order(created_at: :desc)
   end
 
   def edit

@@ -1,12 +1,13 @@
 class Admin::DaySchedulesController < Admin::ApplicationController
+  before_action :load_day_schedule
+  before_action :load_camp
+
   def edit
-    @day_schedule = DaySchedule.find(params[:id])
   end
 
   def update
-    @day_schedule = DaySchedule.find(params[:id])
     if @day_schedule.update(day_schedule_params)
-      redirect_to edit_admin_camp_path(@day_schedule.camp), notice: "The day schedule has been updated succesfully"
+      redirect_to admin_camp_path(@camp), notice: "The day schedule has been updated succesfully"
     else
       render action: :edit
     end
@@ -16,5 +17,13 @@ class Admin::DaySchedulesController < Admin::ApplicationController
 
     def day_schedule_params
       params.require(:day_schedule).permit(:content)
+    end
+
+    def load_camp
+      @camp = @day_schedule.camp
+    end
+
+    def load_day_schedule
+      @day_schedule = DaySchedule.find(params[:id])
     end
 end

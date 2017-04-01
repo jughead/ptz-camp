@@ -1,5 +1,7 @@
 <div class="col-xs-6 col-xs-offset-3">
   <%= simple_form_for @camp, url: (@camp.persisted? ? admin_camp_path(@camp) : admin_camps_path) do |f| %>
+    <%= f.input :start_date, disabled: @camp.persisted? %>
+    <%= f.input :finish_date, disabled: @camp.persisted? %>
     <%= f.input :title %>
     <%= f.input :slug %>
     <%= f.input :telegram_intro %>

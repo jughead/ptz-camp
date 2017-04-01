@@ -1,10 +1,11 @@
 class Admin::CampsController < Admin::ApplicationController
+  before_action :load_camp, only: %i(edit show update)
   def new
     @camp = Camp.new(title: "Petrozavodsk Programming Camp #{Date.current.year}")
   end
 
   def create
-    @camp = Camp.new(camp_params)
+    @camp = Camp.new(create_camp_params)
     if @camp.save
       redirect_to action: :index, notice: 'The camp has been created successfully'
     else
@@ -17,12 +18,13 @@ class Admin::CampsController < Admin::ApplicationController
   end
 
   def edit
-    @camp = Camp.find(params[:id])
+  end
+
+  def show
   end
 
   def update
-    @camp = Camp.find(params[:id])
-    if @camp.update(camp_params)
+    if @camp.update(edit_camp_params)
       redirect_to action: :index, notice: 'The camp has been updated successfully'
     else
       render action: :edit
@@ -31,7 +33,15 @@ class Admin::CampsController < Admin::ApplicationController
 
   private
 
-    def camp_params
+    def edit_camp_params
       params.require(:camp).permit(:title, :slug, :telegram_intro)
+    end
+
+    def create_camp_params
+      params.require(:camp).permit(:title, :slug, :telegram_intro, :start_date, :finish_date)
+    end
+
+    def load_camp
+      @camp = Camp.find(params[:id])
     end
 end

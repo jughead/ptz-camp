@@ -14,6 +14,7 @@ class Camps::CreateDaySchedulesCommand
     start = @camp.start_date
     finish = @camp.finish_date
     ActiveRecord::Base.transaction do
+      day = start
       while day <= finish do
         DaySchedule.create!(camp: @camp, date: day, content: DEFAULT_CONTENT)
         day = day.next_day

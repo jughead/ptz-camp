@@ -10,4 +10,8 @@ class Camp < ApplicationRecord
   validates :finish_date, presence: true
 
   add_command :create_day_schedules
+
+  def schedule
+    @schedule ||= Schedule.new(self)
+  end
 end

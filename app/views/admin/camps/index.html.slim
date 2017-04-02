@@ -1,0 +1,6 @@
+= link_to 'New camp', new_admin_camp_path, class: 'btn btn-primary'
+hr
+ul.list-group
+  - @camps.each do |camp|
+    li.list-group-item style="text-align: center"
+      = link_to camp.title, admin_camp_path(camp)

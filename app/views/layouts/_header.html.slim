@@ -1,0 +1,22 @@
+nav.navbar.navbar-default
+  .container
+    .navbar-header
+      button.navbar-toggle.collapsed type="button" data={toggle: 'collapse', target: '#navbar'} aria-expander='false' aria-controls='navbar'
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      = link_to 'PtzCamp', root_path, class: 'navbar-brand'
+    .navbar-collapse.collapse#navbar
+      ul.nav.navbar-nav
+        - if user_signed_in? && current_user.has_role?(:admin)
+          li = link_to 'Admin', admin_path
+        - if @camp
+          li = link_to 'Schedule', @camp.schedule.path
+      ul.nav.navbar-nav.navbar-right
+        - if user_signed_in?
+          li = link_to 'My account', edit_user_registration_path
+          li = link_to 'Sign out', destroy_user_session_path, method: :delete
+        - else
+          li = link_to 'Sign in', new_user_session_path
+          li = link_to 'Sign up', new_user_registration_path

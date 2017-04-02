@@ -13,5 +13,10 @@ Rails.application.routes.draw do
     end
   end
 
+  scope ':slug' do
+    get '', to: 'camps#show', as: :camp
+    resource :schedule, controller: :schedule, only: :show
+  end
+
   root to: 'site#home'
 end

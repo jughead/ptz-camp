@@ -1,0 +1,10 @@
+.ptzcamp-schedule
+  - @day_schedules.each_with_index do |day, i|
+    - if i % 3 == 0
+      <div class="ptzcamp-schedule__column">
+    .panel.ptzcamp-schedule__day class="#{day.current? ? 'active' : ''}"
+      b = day.title
+      == simple_format(day.content)
+
+    - if (i + 1) % 3 == 0
+      </div>

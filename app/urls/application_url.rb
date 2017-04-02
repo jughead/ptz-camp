@@ -12,7 +12,6 @@ class ApplicationUrl
   end
 
   def path
-    puts path_method
     context.public_send(path_method, *parameters)
   end
 

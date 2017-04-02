@@ -30,6 +30,8 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 # Convenient form rendering
 gem 'simple_form'
+# Convenient and fast view handler
+gem 'slim'
 
 ####################################
 # Authentication, authorization, etc

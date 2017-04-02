@@ -1,0 +1,23 @@
+.ptzcamp-schedule .ptzcamp-schedule__column {
+  width: 22%;
+  display: inline-block;
+  margin-right:10px;
+  vertical-align: top;
+}
+
+@media screen {
+  .ptzcamp-schedule__day.active {
+    background-color: lightgreen;
+    padding: 5px;
+  }
+  span.ptzcamp-schedule__event.badge-success {
+    background-color: #5cb85c;
+  }
+  span.ptzcamp-schedule__event.badge a {
+    color: white;
+  }
+
+  span.ptzcamp-schedule__event.badge a:hover {
+    color: black;
+  }
+}

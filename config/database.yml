@@ -81,5 +81,4 @@ test:
 production:
   <<: *default
   database: ptz-camp-bot_production
-  username: ptz-camp-bot
   password: <%= ENV['PTZ-CAMP-BOT_DATABASE_PASSWORD'] %>

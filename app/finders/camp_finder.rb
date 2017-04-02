@@ -19,6 +19,10 @@ class CampFinder < BaseFinder
     model.where(slug: slug).first
   end
 
+  def find_by_slug!(slug)
+    model.where(slug: slug).take!
+  end
+
   def build
     model.new
   end

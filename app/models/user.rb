@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, omniauth_providers: PtzCamp::OmniAuth.providers
 
+  include Users::OldSite
+
   has_many :messages, dependent: :destroy
   has_many :identities, dependent: :destroy
 

@@ -10,8 +10,8 @@ module Users
       return false if encrypted_password.blank?
       bcrypt   = ::BCrypt301::Password.new(encrypted_password)
       old_site_pepper = Rails.application.secrets.old_site_pepper
-      password = ::BCrypt301::Engine.hash_secret("#{password}#{old_site_pepper}", bcrypt.salt)
-      Devise.secure_compare(password, encrypted_password)
+      pass = ::BCrypt301::Engine.hash_secret("#{password}#{old_site_pepper}", bcrypt.salt)
+      Devise.secure_compare(pass, encrypted_password)
     end
 
   end

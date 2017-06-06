@@ -22,6 +22,8 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
+# Font Awesome
+gem 'font-awesome-rails'
 
 ########################
 # Template extensions
@@ -37,6 +39,9 @@ gem 'slim'
 # Authentication, authorization, etc
 ####################################
 gem 'devise'
+gem 'omniauth-facebook'
+gem 'omniauth-vkontakte'
+gem 'omniauth-google-oauth2'
 # Role base authorization
 gem 'rolify'
 
@@ -56,6 +61,8 @@ gem 'telegram-bot-ruby'
 ####################################
 # Decorates models and everything
 gem 'draper'
+# Batch creation of records
+gem 'activerecord-import'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

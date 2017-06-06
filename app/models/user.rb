@@ -17,6 +17,7 @@ class User < ApplicationRecord
   after_create :assign_default_role
 
   add_command :new_with_session
+  add_command :sync_omniauth_email_verification
 
   def admin?
     has_role?(:admin)

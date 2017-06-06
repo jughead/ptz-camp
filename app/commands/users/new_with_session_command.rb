@@ -11,7 +11,7 @@ module Users
       if omniauth_data?
         set_omniauth_data
         set_random_password
-        check_email_verification
+        sync_omniauth_email_verification
         set_identity
       end
       set_params
@@ -40,10 +40,8 @@ module Users
         @user.password = Devise.friendly_token[0,20] if @user.new_record?
       end
 
-      def check_email_verification
-        email_is_verified = omniauth.info.email &&
-          (omniauth.info.verified || omniauth.info.verified_email)
-        @user.skip_confirmation! if @user.email.present? && email_is_verified
+      def sync_omniauth_email_verification
+        @user.sync_omniauth_email_verification(omniauth)
       end
 
       def set_params

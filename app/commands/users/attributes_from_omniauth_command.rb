@@ -11,8 +11,6 @@ module Users
     end
 
     def execute
-      p @auth
-      p @auth.info.name
       data = {
         name: @auth.info.name,
         email: @auth.info.email,

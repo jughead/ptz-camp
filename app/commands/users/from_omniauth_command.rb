@@ -62,6 +62,7 @@ module Users
 
       def assign_new_attributes
         user.attributes = auth_user_attributes
+        user.sync_omniauth_email_verification(auth)
       end
 
       def existing_user?

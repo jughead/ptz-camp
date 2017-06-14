@@ -11,7 +11,7 @@ class CampFinder < BaseFinder
 
   def find
     if @current
-      model.order(created_at: :desc).first
+      model.order(start_date: :desc).first
     end
   end
 

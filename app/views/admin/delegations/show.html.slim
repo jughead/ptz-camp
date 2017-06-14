@@ -1,0 +1,14 @@
+h1 = @delegation.name
+
+dl
+  dt Supervisor
+  dd = @delegation.supervisor&.name
+  dt Max teams
+  dd = @delegation.max_teams
+
+
+h2 Registered participants
+
+- @participants.each do |participant|
+  = link_to participant.name, '#'
+  br

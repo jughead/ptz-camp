@@ -1,15 +1,16 @@
 class Admin::MessagesController < Admin::ApplicationController
+  load_and_authorize_resource through: :current_user
+  load_current_camp
+
   def index
-    @messages = current_user.messages.order(created_at: :desc)
+    @messages = @messages.order(created_at: :desc)
   end
 
   def new
-    @message = Message.new
   end
 
   def create
-    @message = Message.new(create_params)
-    @message.user = current_user
+    @message.assign_attributes(create_params)
     if @message.save
       CreateMessageNotificationsJob.perform_later(@message)
       redirect_to action: :index, notice: 'The message is being processed'

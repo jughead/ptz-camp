@@ -1,29 +1,36 @@
 class Admin::DaySchedulesController < Admin::ApplicationController
-  before_action :load_day_schedule
-  before_action :load_camp
+  load_resource :camp
+  load_and_authorize_resource through: :camp
+  decorate_current_camp
+
+  def index
+  end
 
   def edit
+    decorate
   end
 
   def update
-    if @day_schedule.update(day_schedule_params)
+    if @day_schedule.update(update_params)
       redirect_to admin_camp_path(@camp), notice: "The day schedule has been updated succesfully"
     else
+      decorate
       render action: :edit
     end
   end
 
   private
 
-    def day_schedule_params
+    def update_params
       params.require(:day_schedule).permit(:content)
     end
 
-    def load_camp
-      @camp = @day_schedule.camp
+    def decorator_class
+      Admin::DayScheduleDecorator
     end
 
-    def load_day_schedule
-      @day_schedule = DaySchedule.find(params[:id])
+    def decorate
+      @day_schedule &&= decorator_class.decorate(@day_schedule)
+      @day_schedules &&= decorator_class.decorate_collection(@day_schedules)
     end
 end

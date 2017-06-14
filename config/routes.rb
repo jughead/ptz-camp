@@ -11,14 +11,17 @@ Rails.application.routes.draw do
     namespace :admin do
       mount Sidekiq::Web => '/sidekiq'
       resources :messages, only: [:index, :create, :new]
-      resources :day_schedules, only: [:edit, :update]
-      resources :camps
+      resources :camps do
+        resources :delegations
+        resources :day_schedules, only: [:index, :edit, :update]
+      end
     end
   end
 
   scope ':slug' do
     get '', to: 'camps#show', as: :camp
     resource :schedule, controller: :schedule, only: :show
+    resource :participants, controller: :participants, only: :create
   end
 
   root to: 'site#home'

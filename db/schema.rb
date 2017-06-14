@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170606121925) do
+ActiveRecord::Schema.define(version: 20170607082925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,16 @@ ActiveRecord::Schema.define(version: 20170606121925) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["camp_id"], name: "index_day_schedules_on_camp_id", using: :btree
+  end
+
+  create_table "delegations", force: :cascade do |t|
+    t.integer  "camp_id"
+    t.string   "name"
+    t.integer  "supervisor_id"
+    t.integer  "max_teams",     default: 1
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["camp_id"], name: "index_delegations_on_camp_id", using: :btree
   end
 
   create_table "identities", force: :cascade do |t|
@@ -67,6 +77,22 @@ ActiveRecord::Schema.define(version: 20170606121925) do
     t.integer  "recipient_id",   null: false
     t.index ["message_id"], name: "index_notifications_on_message_id", using: :btree
     t.index ["recipient_type", "recipient_id", "message_id"], name: "index_recipient_message_on_notifications_uniq", unique: true, using: :btree
+  end
+
+  create_table "participants", force: :cascade do |t|
+    t.integer  "camp_id"
+    t.integer  "delegation_id"
+    t.integer  "user_id"
+    t.date     "arrival"
+    t.date     "departure"
+    t.jsonb    "personal"
+    t.string   "passport_scan"
+    t.integer  "tshirt"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["camp_id"], name: "index_participants_on_camp_id", using: :btree
+    t.index ["delegation_id"], name: "index_participants_on_delegation_id", using: :btree
+    t.index ["user_id"], name: "index_participants_on_user_id", using: :btree
   end
 
   create_table "roles", force: :cascade do |t|
@@ -128,5 +154,9 @@ ActiveRecord::Schema.define(version: 20170606121925) do
   end
 
   add_foreign_key "day_schedules", "camps"
+  add_foreign_key "delegations", "camps"
   add_foreign_key "identities", "users"
+  add_foreign_key "participants", "camps"
+  add_foreign_key "participants", "delegations"
+  add_foreign_key "participants", "users"
 end

@@ -44,6 +44,7 @@ gem 'omniauth-vkontakte'
 gem 'omniauth-google-oauth2'
 # Role base authorization
 gem 'rolify'
+gem 'cancancan'
 
 ####################################
 # Background job processing
@@ -60,9 +61,12 @@ gem 'telegram-bot-ruby'
 # Misc
 ####################################
 # Decorates models and everything
-gem 'draper'
+gem 'draper', '~> 3.0.0'
 # Batch creation of records
 gem 'activerecord-import'
+# File upload
+gem 'carrierwave'
+gem 'cloudinary'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

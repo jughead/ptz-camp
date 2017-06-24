@@ -5,6 +5,8 @@ class StructType < ActiveModel::Type::Value
     when String
       value = JSON.parse(value) rescue {}
     when Hash
+    when ActionController::Parameters
+      value = value.to_h
     else
       return value
     end

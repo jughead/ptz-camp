@@ -1,6 +1,6 @@
 class ScheduleController < ApplicationController
-  include CampLoader
-  before_action :load_camp
+  load_camp
+  decorate_current_camp
   before_action :load_day_schedules
 
   def show
@@ -9,7 +9,7 @@ class ScheduleController < ApplicationController
   private
 
     def load_day_schedules
-      @day_schedules = @camp.day_schedules.decorate
+      @day_schedules = @camp.day_schedules.map(&:decorate)
     end
 
 end

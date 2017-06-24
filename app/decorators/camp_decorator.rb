@@ -1,4 +1,5 @@
 class CampDecorator < ApplicationDecorator
-  decorates 'Camp'
-
+  def to_param
+    slug
+  end
 end

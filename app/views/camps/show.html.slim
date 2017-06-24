@@ -1,5 +1,8 @@
 h1 = @camp.title
-
+br
 - if can? :sign_up, @camp
-  p Here you can register to the camp.
-  = render 'participants/form', participant: @camp.build_participant(current_user)
+  div
+    = link_to 'Register to the camp', [:new, @camp, :participant], class: 'btn btn-primary'
+- if can? :edit, @participant
+  div
+    = link_to 'Edit participation', [:edit, @camp, @participant], class: 'btn btn-primary'

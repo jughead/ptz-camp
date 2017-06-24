@@ -17,7 +17,11 @@ class NilObject
     value.nil?
   end
 
-  def method_missing?(a)
+  def method_missing(a, *args)
     self
+  end
+
+  def respond_to?(a)
+    true
   end
 end

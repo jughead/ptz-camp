@@ -1,7 +1,7 @@
-class PersonalData
-  include ActiveModel::Model
+class PersonalData < ApplicationStruct
 
-  attr_accessor :passport_number,
+  def self.attributes
+    @attributes ||= [:passport_number,
     :passport_issue_date,
     :passport_expire_date,
     :first_name,
@@ -15,9 +15,18 @@ class PersonalData
     :place_of_work,
     :work_address,
     :occupation,
-    :points_to_visit
+    :points_to_visit].freeze
+  end
+
+  attr_accessor *(self.attributes - [:passport_issue_date, :passport_expire_date])
+  attribute :passport_issue_date, :date
+  attribute :passport_expire_date, :date
 
   def attributes
-    instance_values
+    self.class.attributes.map{|key| [key, public_send(key)]}.to_h
+  end
+
+  def attribute_names
+    self.class.attributes
   end
 end

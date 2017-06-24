@@ -8,7 +8,7 @@ class PassportScanUploader < CarrierWave::Uploader::Base
   end
 
   def public_id
-    model.class.name.underscore + '/' + model.id
+    @stored_public_id || model.class.name.underscore + '/' + Cloudinary::Utils.random_public_id
   end
 
   def on_upload

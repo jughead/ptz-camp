@@ -12,8 +12,6 @@ gem 'puma', '~> 3.0'
 #######################
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Adding bootstrap as we are lazy and non-frontend guys
@@ -45,6 +43,7 @@ gem 'omniauth-google-oauth2'
 # Role base authorization
 gem 'rolify'
 gem 'cancancan'
+gem "recaptcha", require: 'recaptcha/rails'
 
 ####################################
 # Background job processing
@@ -67,6 +66,8 @@ gem 'activerecord-import'
 # File upload
 gem 'carrierwave'
 gem 'cloudinary'
+# For making structs with type validation
+gem 'active_model_attributes'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -83,6 +84,11 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   # Open emails in browser instead of real send
   gem 'letter_opener'
+end
+
+group :production do
+  # Use Uglifier as compressor for JavaScript assets
+  gem 'uglifier', '>= 1.3.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

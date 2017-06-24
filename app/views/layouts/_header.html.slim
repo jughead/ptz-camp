@@ -9,12 +9,12 @@ nav.navbar.navbar-default
       = link_to 'PtzCamp', root_path, class: 'navbar-brand'
     .navbar-collapse.collapse#navbar
       ul.nav.navbar-nav
-        - if user_signed_in? && current_user.has_role?(:admin)
-          li = link_to 'Admin', admin_path
         - if @camp
-          li = link_to 'Schedule', @camp.schedule.path
+          li = link_to 'Schedule', camp_schedule_path(@camp)
       ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
+          - if current_user.has_role?(:admin)
+            li = link_to 'Admin', admin_path
           li = link_to 'My account', edit_user_registration_path
           li = link_to 'Sign out', destroy_user_session_path, method: :delete
         - else

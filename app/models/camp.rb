@@ -1,6 +1,7 @@
 class Camp < ApplicationRecord
   has_many :day_schedules, dependent: :destroy
   has_many :delegations, dependent: :destroy
+  has_many :participants, dependent: :destroy
 
   after_create :create_day_schedules
 

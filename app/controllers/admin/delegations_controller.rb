@@ -32,7 +32,11 @@ class Admin::DelegationsController < Admin::ApplicationController
 
   def destroy
     @delegation.destroy
-    redirect_to action: :index, notice: 'The delegation deleted'
+    redirect_to action: :index, notice: 'The delegation is deleted'
+  end
+
+  def show
+    @participants = @delegation.participants
   end
 
   private

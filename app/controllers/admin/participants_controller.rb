@@ -1,10 +1,10 @@
 class Admin::ParticipantsController < Admin::ApplicationController
   load_resource :camp
-  load_resource :delegation, through: :camp
-  load_and_authorize_resource through: :delegation
+  load_and_authorize_resource through: :camp
   decorate_current_camp
 
   def index
+    @participants = @participants.where(delegation_id: params[:delegation_id]) if params[:delegation_id]
   end
 
   def edit

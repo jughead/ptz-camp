@@ -31,6 +31,9 @@ class Admin::CampsController < Admin::ApplicationController
     end
   end
 
+  def dashboard
+  end
+
   private
 
     def update_params

@@ -6,7 +6,7 @@ module Camps
     end
 
     def execute
-      Participant.new(camp: @camp, user: @user, personal: {}).decorate
+      @camp.participants.where(user: @user).first_or_initialize
     end
   end
 end

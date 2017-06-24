@@ -15,7 +15,7 @@ class AdminAbility
   end
 
   def camp_rules
-    can [:index, :show, :new, :edit, :create, :update], Camp
+    can [:index, :show, :new, :edit, :create, :update, :dashboard], Camp
   end
 
   def delegation_rules

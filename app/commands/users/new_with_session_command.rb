@@ -21,11 +21,15 @@ module Users
     private
 
       def omniauth_data?
-        omniauth
+        session_data
+      end
+
+      def session_data
+        @session['devise.provider_data']
       end
 
       def omniauth
-        @omniauth ||= OmniAuth::AuthHash.new(@session['devise.provider_data'])
+        @omniauth ||= OmniAuth::AuthHash.new(session_data)
       end
 
       def attributes_from_omniauth

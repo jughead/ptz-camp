@@ -1,4 +1,4 @@
 = simple_form_for @delegation, url: @delegation.update_path do |f|
   = f.input :name
   = f.input :max_teams
-  = f.submit
+  = f.button :submit, class: 'btn btn-default'

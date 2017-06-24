@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
   has_many :messages, dependent: :destroy
   has_many :identities, dependent: :destroy
+  has_many :participations, class_name: 'Participant', inverse_of: :user, dependent: :destroy
 
   rolify
 
@@ -23,6 +24,10 @@ class User < ApplicationRecord
     has_role?(:admin)
   end
 
+  def superadmin?
+    has_role?(:superadmin)
+  end
+
   def assign_default_role
     add_role(:user) if roles.blank?
   end
@@ -33,5 +38,9 @@ class User < ApplicationRecord
 
   def password_required?
     identities.blank? && super
+  end
+
+  def guest?
+    false
   end
 end

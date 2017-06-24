@@ -1,0 +1,46 @@
+= simple_form_for [@camp, participant] do |f|
+  - if participant.requires_registration?
+    h3 Site registration
+    - if devise_mapping.omniauthable?
+      p You can either sign up via socials first
+      = render 'devise/shared/socials'
+      p Or enter email and password for registration
+    - else
+      p We need your email and password to identify in the system
+    = f.input :name
+    = f.input :email, required: true
+    = f.input :password, required: true, hint: participant.password_hint
+    = f.input :password_confirmation, required: true
+  h3 Camp registration
+  = f.input :arrival, as: :date
+  = f.input :departure, as: :date
+  = f.fields_for :personal, f.object.personal do |ff|
+    = ff.input :first_name
+    = ff.input :last_name
+    = ff.input :middle_names
+    = ff.input :latin_name
+    = ff.input :country_permanent, as: :string
+    = ff.input :region_permanent
+    = ff.input :address_permanent, as: :text
+    = ff.input :passport_number
+    = ff.input :passport_issue_date, as: :date
+    = ff.input :passport_expire_date, as: :date
+    = ff.input :visa_city
+    = ff.input :place_of_work
+    = ff.input :work_address, as: :text
+    = ff.input :occupation
+    = ff.input :points_to_visit
+  = f.input :tshirt, as: :select, collection: Participant.tshirts.map(&:first)
+  = f.input :delegation_id, as: :select, collection: participant.camp.delegations.order(name: :asc)
+  = f.input :passport_scan
+  - if participant.requires_registration?
+    - unless @recaptcha_ok
+      div.form-group.has-error
+        = recaptcha_tags
+        span.help-block
+          = flash[:recaptcha_error]
+    - else
+      = recaptcha_tags
+      br
+  = f.button :submit, class: 'btn btn-primary'
+

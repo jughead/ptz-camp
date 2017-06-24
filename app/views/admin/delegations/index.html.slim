@@ -1,0 +1,18 @@
+= link_to 'New delegation', new_admin_camp_delegation_path(@camp), class: 'btn btn-primary'
+hr
+
+table.table
+  thead
+    tr
+      th.col-xs-1 #
+      th.col-xs-5 Delegation
+      th.col-xs-6 Actions
+  tbody
+    - @delegations.each do |delegation|
+      tr
+        td = delegation.id
+        td = link_to delegation.name, admin_camp_delegation_path(@camp, delegation)
+        td
+          = link_to 'Edit', edit_admin_camp_delegation_path(@camp, delegation), class: 'btn btn-xs btn-success'
+          = link_to 'Destroy', admin_camp_delegation_path(@camp, delegation), data: {method: :delete}, class: 'btn btn-xs btn-danger'
+

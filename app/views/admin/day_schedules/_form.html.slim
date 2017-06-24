@@ -1,5 +1,5 @@
 .col-xs-6.col-xs-offset-3
-  = simple_form_for @day_schedule, url: admin_day_schedule_path(@day_schedule) do |f|
+  = simple_form_for @day_schedule, url: [:admin, @camp, @day_schedule] do |f|
     = f.input :date, as: :date, html5: true, disabled: true
     = f.input :content, input_html: { rows: 8 }
     = f.button :submit, class: 'btn btn-primary'

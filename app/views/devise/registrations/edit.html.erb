@@ -40,13 +40,10 @@
 <% end -%>
 
 <%- nonconnected.each do |provider| %>
-  <div>
-
     <%= link_to omniauth_authorize_path(resource_name, provider), class:
   'btn btn-default' do %>
       <%= omniauth_icon(provider) %> <%= OmniAuth::Utils.camelize(provider) %>
-    <% end -%>
-  </div>
+    <% end %>
 <% end -%>
 
 <% if false %>

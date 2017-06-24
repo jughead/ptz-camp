@@ -5,4 +5,4 @@ p
 h2 Schedule
 ul
   - @camp.day_schedules.each do |day|
-    li = link_to day.date, edit_admin_day_schedule_path(day)
+    li = link_to day.date, day.edit_path

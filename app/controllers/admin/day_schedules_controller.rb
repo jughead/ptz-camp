@@ -7,14 +7,12 @@ class Admin::DaySchedulesController < Admin::ApplicationController
   end
 
   def edit
-    decorate
   end
 
   def update
     if @day_schedule.update(update_params)
       redirect_to admin_camp_path(@camp), notice: "The day schedule has been updated succesfully"
     else
-      decorate
       render action: :edit
     end
   end

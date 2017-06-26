@@ -12,8 +12,8 @@
     = f.input :password, required: true, hint: participant.password_hint
     = f.input :password_confirmation, required: true
   h3 Camp registration
-  = f.input :arrival, as: :date
-  = f.input :departure, as: :date
+  = f.input :arrival, as: :date, order: [:day, :month, :year], default: @camp.start_date
+  = f.input :departure, as: :date, order: [:day, :month, :year], default: @camp.finish_date
   = f.fields_for :personal, f.object.personal do |ff|
     = ff.input :first_name
     = ff.input :last_name
@@ -23,8 +23,8 @@
     = ff.input :region_permanent
     = ff.input :address_permanent, as: :text
     = ff.input :passport_number
-    = ff.input :passport_issue_date, as: :date
-    = ff.input :passport_expire_date, as: :date
+    = ff.input :passport_issue_date, as: :date, start_year: Date.current.year - 90, end_year: Date.current.year + 30, order: [:day, :month, :year]
+    = ff.input :passport_expire_date, as: :date, start_year: Date.current.year - 90, end_year: Date.current.year + 30, order: [:day, :month, :year]
     = ff.input :visa_city
     = ff.input :place_of_work
     = ff.input :work_address, as: :text

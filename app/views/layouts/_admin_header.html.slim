@@ -9,16 +9,16 @@ nav.navbar.navbar-inverse
       = link_to 'Admin', admin_path, class: 'navbar-brand'
     .navbar-collapse.collapse#navbar
       ul.nav.navbar-nav
-        li = link_to 'Messages', admin_messages_path
-        li = link_to 'Camps', admin_camps_path
+        li = link_to 'Messages', admin_messages_path if can?(:index, Message)
+        li = link_to 'Camps', admin_camps_path if can?(:index, Camp)
         - if @camp&.persisted?
           li
             = link_to '#', class: 'dropdown-toggle', data: {toggle: 'dropdown'} do
               = @camp.title
               <b class="caret"></b>
             ul.dropdown-menu.multi-level
-              li = link_to 'Delegations', @camp.delegations_path
-              li = link_to 'Schedule', @camp.day_schedules_path
+              li = link_to 'Delegations', @camp.delegations_path if can?(:index, Delegation)
+              li = link_to 'Schedule', @camp.day_schedules_path if can?(:index, DaySchedule)
 
       ul.nav.navbar-nav.navbar-right
         li = link_to 'Site', root_path

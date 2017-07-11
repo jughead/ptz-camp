@@ -16,4 +16,6 @@ dl
     dt = key.to_s.humanize
     dd = @participant.personal.public_send(key)
   dt Passport scan
-  dd = image_tag @participant.passport_scan.thumb.url
+  dd
+    = link_to @participant.passport_scan.url, target: :_blank do
+      = image_tag @participant.passport_scan.thumb.url

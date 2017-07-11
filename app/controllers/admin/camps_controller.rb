@@ -7,7 +7,8 @@ class Admin::CampsController < Admin::ApplicationController
 
   def create
     if @camp.save
-      redirect_to action: :index, notice: 'The camp has been created successfully'
+      flash[:notice] = 'The camp has been created successfully'
+      redirect_to :index
     else
       render action: :new
     end
@@ -25,7 +26,8 @@ class Admin::CampsController < Admin::ApplicationController
 
   def update
     if @camp.update(update_params)
-      redirect_to action: :index, notice: 'The camp has been updated successfully'
+      flash[:notice] = 'The camp has been updated successfully'
+      redirect_to action: :edit
     else
       render action: :edit
     end

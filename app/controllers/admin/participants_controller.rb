@@ -15,7 +15,7 @@ class Admin::ParticipantsController < Admin::ApplicationController
 
   def update
     if @participant.update(update_params)
-      redirect_to action: :index, notice: 'The participant is updated'
+      redirect_to({action: :show}, notice: 'The participant is updated')
     else
       render :new
     end
@@ -23,12 +23,16 @@ class Admin::ParticipantsController < Admin::ApplicationController
 
   def destory
     @participant.destroy
-    redirect_to action: :index, notice: 'The participant is removed'
+    redirect_to({action: :index}, notice: 'The participant is removed')
   end
 
   private
 
     def create_params
       params.require(:participant).permit(:arrival, :departure, :preferences)
+    end
+
+    def update_params
+      params.require(:participant).permit(:arrival, :departure, :delegation_id, :passport_scan, :tshirt, personal: PersonalData.attributes)
     end
 end

@@ -7,7 +7,8 @@ class Admin::CampsController < Admin::ApplicationController
 
   def create
     if @camp.save
-      redirect_to action: :index, notice: 'The camp has been created successfully'
+      flash[:notice] = 'The camp has been created successfully'
+      redirect_to :index
     else
       render action: :new
     end
@@ -25,22 +26,24 @@ class Admin::CampsController < Admin::ApplicationController
 
   def update
     if @camp.update(update_params)
-      redirect_to action: :index, notice: 'The camp has been updated successfully'
+      flash[:notice] = 'The camp has been updated successfully'
+      redirect_to action: :edit
     else
       render action: :edit
     end
   end
 
   def dashboard
+    @participants = @camp.participants
   end
 
   private
 
     def update_params
-      params.require(:camp).permit(:title, :slug, :telegram_intro)
+      params.require(:camp).permit(:title, :slug, :telegram_intro, :front_page)
     end
 
     def create_params
-      params.require(:camp).permit(:title, :slug, :telegram_intro, :start_date, :finish_date)
+      params.require(:camp).permit(:title, :slug, :telegram_intro, :start_date, :finish_date, :front_page)
     end
 end

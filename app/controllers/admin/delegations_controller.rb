@@ -16,7 +16,7 @@ class Admin::DelegationsController < Admin::ApplicationController
 
   def update
     if @delegation.update(update_params)
-      redirect_to action: :index, notice: 'The delegation is updated'
+      redirect_to({action: :index}, notice: 'The delegation is updated')
     else
       render :new
     end
@@ -24,7 +24,7 @@ class Admin::DelegationsController < Admin::ApplicationController
 
   def create
     if @delegation.save
-      redirect_to action: :index, notice: 'The delegation is added'
+      redirect_to({action: :index}, notice: 'The delegation is added')
     else
       render :new
     end
@@ -32,7 +32,7 @@ class Admin::DelegationsController < Admin::ApplicationController
 
   def destroy
     @delegation.destroy
-    redirect_to action: :index, notice: 'The delegation is deleted'
+    redirect_to({action: :index}, notice: 'The delegation is deleted')
   end
 
   def show

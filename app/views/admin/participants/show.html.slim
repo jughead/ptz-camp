@@ -1,0 +1,21 @@
+= link_to 'Back to participants', [:admin, @camp, :participants]
+
+h2
+  | Participant #{@participant.name}
+  | &nbsp;
+  small
+    = link_to 'edit', [:edit, :admin, @camp, @participant]
+
+dl
+  dt Email
+  dd = @participant.user.email
+  dt Arrival/Departure dates
+  dd = "#{@participant.arrival} - #{@participant.departure}"
+  hr
+  - %i(first_name last_name middle_names latin_name passport_number passport_issue_date       passport_expire_date country_permanent region_permanent address_permanent visa_city       place_of_work work_address occupation points_to_visit).each do |key|
+    dt = key.to_s.humanize
+    dd = @participant.personal.public_send(key)
+  dt Passport scan
+  dd
+    = link_to @participant.passport_scan.url, target: :_blank do
+      = image_tag @participant.passport_scan.thumb.url

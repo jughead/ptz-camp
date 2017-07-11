@@ -13,7 +13,7 @@ class Admin::MessagesController < Admin::ApplicationController
     @message.assign_attributes(create_params)
     if @message.save
       CreateMessageNotificationsJob.perform_later(@message)
-      redirect_to action: :index, notice: 'The message is being processed'
+      redirect_to({action: :index}, notice: 'The message is being processed')
     else
       render :new
     end

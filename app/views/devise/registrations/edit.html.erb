@@ -29,22 +29,29 @@
   registered = resource_class.omniauth_providers
   nonconnected = registered - connected
 %>
-<%- connected.each do |provider| %>
-  <div>
-    You are connected with <%= omniauth_icon(provider) %> <%= OmniAuth::Utils.camelize(provider) -%>.<br/>
-  </div>
-<% end -%>
+<div>
+  <%- connected.each do |provider| %>
+    <div>
+      You are connected with <%= omniauth_icon(provider) %> <%= OmniAuth::Utils.camelize(provider) -%>.<br/>
+    </div>
+  <% end -%>
 
-<%- if nonconnected.present? %>
-  Connect with:
-<% end -%>
+  <%- if nonconnected.present? %>
+    Connect with:
+  <% end -%>
 
-<%- nonconnected.each do |provider| %>
-    <%= link_to omniauth_authorize_path(resource_name, provider), class:
-  'btn btn-default' do %>
-      <%= omniauth_icon(provider) %> <%= OmniAuth::Utils.camelize(provider) %>
-    <% end %>
-<% end -%>
+  <%- nonconnected.each do |provider| %>
+      <%= link_to omniauth_authorize_path(resource_name, provider), class:
+    'btn btn-default' do %>
+        <%= omniauth_icon(provider) %> <%= OmniAuth::Utils.camelize(provider) %>
+      <% end %>
+  <% end -%>
+</div>
+
+<br/>
+<div>
+  <%= link_to 'Edit participation', [:edit, @camp, @participant], class: 'btn btn-primary' if can? :edit, @participant %>
+</div>
 
 <% if false %>
 <h3>Cancel my account</h3>

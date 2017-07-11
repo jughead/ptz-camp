@@ -32,15 +32,16 @@ class Admin::CampsController < Admin::ApplicationController
   end
 
   def dashboard
+    @participants = @camp.participants
   end
 
   private
 
     def update_params
-      params.require(:camp).permit(:title, :slug, :telegram_intro)
+      params.require(:camp).permit(:title, :slug, :telegram_intro, :front_page)
     end
 
     def create_params
-      params.require(:camp).permit(:title, :slug, :telegram_intro, :start_date, :finish_date)
+      params.require(:camp).permit(:title, :slug, :telegram_intro, :start_date, :finish_date, :front_page)
     end
 end

@@ -1,0 +1,21 @@
+= link_to 'Back to camp', [:admin, @camp]
+h2 Participants
+
+table.table
+  thead
+    tr
+      th.col-xs-1 #
+      th.col-xs-1 User Id
+      th.col-xs-5 Name
+      th.col-xs-5 Actions
+  tbody
+    - @participants.each do |participant|
+      tr
+        td = participant.id
+        td = participant.user_id
+        td = link_to participant.name, admin_camp_participant_path(@camp, participant)
+        td
+          = link_to 'Edit', edit_admin_camp_participant_path(@camp, participant), class: 'btn btn-xs btn-success'
+          = link_to 'Destroy', admin_camp_participant_path(@camp, participant), data: {method: :delete}, class: 'btn btn-xs btn-danger'
+
+

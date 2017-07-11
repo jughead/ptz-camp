@@ -4,7 +4,7 @@ class PassportScanUploader < CarrierWave::Uploader::Base
   process :on_upload
 
   version :thumb do
-    resize_to_fit 50, 50
+    resize_to_fit 100, 100
   end
 
   def public_id

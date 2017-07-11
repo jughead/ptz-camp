@@ -1,7 +1,12 @@
 source 'https://rubygems.org'
 ruby '2.3.1'
 
-gem 'rails', '~> 5.0.2'
+git_source(:github) do |repo_name|
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  "https://github.com/#{repo_name}.git"
+end
+
+gem 'rails', '~> 5.0.4'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
@@ -11,7 +16,7 @@ gem 'puma', '~> 3.0'
 # Asset extensions
 #######################
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '~> 5.0.4'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Adding bootstrap as we are lazy and non-frontend guys
@@ -22,6 +27,8 @@ gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 # Font Awesome
 gem 'font-awesome-rails'
+# wysiwyg editor
+# gem 'ckeditor'
 
 ########################
 # Template extensions
@@ -84,6 +91,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   # Open emails in browser instead of real send
   gem 'letter_opener'
+  # gem 'i18n-debug'
 end
 
 group :production do

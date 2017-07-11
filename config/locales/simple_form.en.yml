@@ -29,3 +29,11 @@ en:
     # prompts:
     #   defaults:
     #     age: 'Select your age'
+  helpers:
+    submit:
+      update: 'Update'
+      create: 'Create'
+      participant: &participant
+        create: 'Register'
+        update: 'Update'
+

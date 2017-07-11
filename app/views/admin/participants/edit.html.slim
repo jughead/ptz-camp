@@ -1,0 +1,6 @@
+= link_to 'Back to participants', [:admin, @camp, :participants]
+
+h2
+  | #{@participant.name} (#{@participant.delegation.name})
+  | &nbsp;
+= render 'form', participant: @participant

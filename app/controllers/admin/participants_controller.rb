@@ -21,7 +21,7 @@ class Admin::ParticipantsController < Admin::ApplicationController
     end
   end
 
-  def destory
+  def destroy
     @participant.destroy
     redirect_to({action: :index}, notice: 'The participant is removed')
   end

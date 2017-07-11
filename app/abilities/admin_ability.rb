@@ -32,6 +32,6 @@ class AdminAbility
   end
 
   def participant_rules
-    can [:index, :edit, :update, :show], Participant
+    can [:index, :edit, :update, :show, :destroy], Participant
   end
 end

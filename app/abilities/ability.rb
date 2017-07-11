@@ -22,7 +22,7 @@ class Ability
     end
 
     can [:edit, :update, :show], Participant do |participant|
-      participant.present? && participant.user_id == user.id
+      participant.persisted? && participant.user_id == user.id
     end
   end
 end

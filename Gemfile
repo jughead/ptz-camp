@@ -27,8 +27,7 @@ gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 # Font Awesome
 gem 'font-awesome-rails'
-# wysiwyg editor
-# gem 'ckeditor'
+gem 'non-stupid-digest-assets'
 
 ########################
 # Template extensions

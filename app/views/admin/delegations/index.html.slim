@@ -13,8 +13,8 @@ table.table
     - @delegations.each do |delegation|
       tr
         td = delegation.id
-        td = link_to delegation.name, admin_camp_delegation_path(@camp, delegation)
+        td = link_to delegation.name, admin_camp_delegation_path(@camp, delegation) if can?(:show, delegation)
         td
-          = link_to 'Edit', edit_admin_camp_delegation_path(@camp, delegation), class: 'btn btn-xs btn-success'
-          = link_to 'Destroy', admin_camp_delegation_path(@camp, delegation), data: {method: :delete}, class: 'btn btn-xs btn-danger'
+          = link_to 'Edit', edit_admin_camp_delegation_path(@camp, delegation), class: 'btn btn-xs btn-success' if can?(:edit, delegation)
+          = link_to 'Destroy', admin_camp_delegation_path(@camp, delegation), data: {method: :delete, confirm: 'Are you sure you want to remove the delegation? All its participants will be deleted as well and will not be available to recover.'}, class: 'btn btn-xs btn-danger' if can?(:destroy, delegation)
 

@@ -14,12 +14,23 @@ class AdminAbility
     messages_rules
   end
 
+  def can(a, c, *args, &block)
+    case c
+    when Class
+      klass = "Admin::#{c.name}Decorator".safe_constantize
+      can(a, [c, klass].compact, *args, &block)
+    else
+      super
+    end
+  end
+
   def camp_rules
     can [:index, :show, :new, :edit, :create, :update, :dashboard], Camp
   end
 
   def delegation_rules
-    can [:index, :new, :create, :edit, :update, :show, :destroy], Delegation
+    can [:index, :new, :create, :edit, :update, :show], Delegation
+    can :destroy, Delegation if user.superadmin?
   end
 
   def day_schedule_rules
@@ -32,6 +43,7 @@ class AdminAbility
   end
 
   def participant_rules
-    can [:index, :edit, :update, :show, :destroy], Participant
+    can [:index, :edit, :update, :show], Participant
+    can :destroy, Participant if user.superadmin?
   end
 end

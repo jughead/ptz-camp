@@ -74,6 +74,7 @@ gem 'carrierwave'
 gem 'cloudinary'
 # For making structs with type validation
 gem 'active_model_attributes'
+gem 'activerecord-session_store'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

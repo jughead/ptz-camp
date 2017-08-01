@@ -14,6 +14,7 @@ class Participant < ApplicationRecord
   validates :delegation_id, presence: true
   validates :camp, presence: true
   validates :camp_id, presence: true
+  validates_associated :personal
 
   delegate :name, to: :user
 

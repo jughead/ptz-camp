@@ -8,6 +8,9 @@ class ParticipantsController < ApplicationController
     @participant = ParticipantForm.new(@camp, current_user)
   end
 
+  def index
+    redirect_to action: :new
+  end
 
   def create
     authorize! :sign_up, @camp

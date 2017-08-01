@@ -14,3 +14,7 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require turbolinks
+//= require_tree ./participants
+//= require_tree ./utils
+
+window.ptzcamp.participants.Form.register()

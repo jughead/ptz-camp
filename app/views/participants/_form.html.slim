@@ -15,24 +15,32 @@
   = f.input :arrival, as: :date, order: [:day, :month, :year], default: @camp.start_date
   = f.input :departure, as: :date, order: [:day, :month, :year], default: @camp.finish_date
   = f.fields_for :personal, f.object.personal do |ff|
-    = ff.input :first_name
-    = ff.input :last_name
+    = ff.input :needs_visa, as: :boolean
+    = ff.input :first_name, required: true
+    = ff.input :last_name, required: true
     = ff.input :middle_names
-    = ff.input :latin_name
-    = ff.input :country_permanent, as: :string
-    = ff.input :region_permanent
-    = ff.input :address_permanent, as: :text
-    = ff.input :passport_number
-    = ff.input :passport_issue_date, as: :date, start_year: Date.current.year - 90, end_year: Date.current.year + 30, order: [:day, :month, :year]
-    = ff.input :passport_expire_date, as: :date, start_year: Date.current.year - 90, end_year: Date.current.year + 30, order: [:day, :month, :year]
-    = ff.input :visa_city
-    = ff.input :place_of_work
-    = ff.input :work_address, as: :text
-    = ff.input :occupation
-    = ff.input :points_to_visit
+    .for_visa
+      = ff.input :latin_name
+      = ff.input :country_permanent, as: :string
+      = ff.input :region_permanent
+      = ff.input :address_permanent, as: :text
+      = ff.input :passport_number
+      = ff.input :passport_issue_date, as: :date, start_year: Date.current.year - 90, end_year: Date.current.year + 30, order: [:day, :month, :year]
+      = ff.input :passport_expire_date, as: :date, start_year: Date.current.year - 90, end_year: Date.current.year + 30, order: [:day, :month, :year]
+      = ff.input :visa_city
+      = ff.input :place_of_work
+      = ff.input :work_address, as: :text
+      = ff.input :occupation
+      = ff.input :points_to_visit
   = f.input :tshirt, as: :select, collection: Participant.tshirts.map(&:first)
   = f.input :delegation_id, as: :select, collection: participant.camp.delegations.order(name: :asc)
-  = f.input :passport_scan
+  .for_visa
+    = f.input :passport_scan, required: false
+    - if @participant.passport_scan.url.present?
+      .form-group.green
+        p.text-success
+          | You have uploaded passport scan.
+
   - if participant.requires_registration?
     - unless @recaptcha_ok
       div.form-group.has-error

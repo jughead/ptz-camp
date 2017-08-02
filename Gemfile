@@ -28,6 +28,7 @@ gem 'turbolinks', '~> 5'
 # Font Awesome
 gem 'font-awesome-rails'
 gem 'non-stupid-digest-assets'
+gem 'vuejs-rails'
 
 ########################
 # Template extensions

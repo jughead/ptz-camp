@@ -29,6 +29,10 @@ class Ability
     end
 
     can :index, Participant
+
+    if user.has_role?(:supervisor)
+      can [:index_my], Participant, delegation: { supervisor_id: user.id }
+    end
   end
 
   def pages_rules

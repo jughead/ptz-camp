@@ -32,7 +32,11 @@ Rails.application.routes.draw do
 
   resources :camps, path: '', param: :slug, only: [] do
     resource :schedule, controller: :schedule, only: :show
-    resources :participants, only: [:new, :index, :create, :edit, :update, :show]
+    resources :participants, only: [:new, :index, :create, :edit, :update, :show] do
+      collection do
+        get :my
+      end
+    end
     resources :teams, only: [:index]
     resources :events, only: [:show, :index] do
       member do

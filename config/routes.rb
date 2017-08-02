@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
   resources :camps, path: '', param: :slug, only: :show do
     resource :schedule, controller: :schedule, only: :show
-    resources :participants, only: [:new, :create, :edit, :update, :show]
+    resources :participants, only: [:new, :index, :create, :edit, :update, :show]
   end
 
   root to: 'site#home'

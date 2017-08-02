@@ -42,6 +42,8 @@ class ParticipantForm
         @user = User.new(user_params)
         @participant.user = user
       end
+      @participant.personal.first_name ||= @participant.user.name&.split&.first
+      @participant.personal.last_name ||= @participant.user.name&.split&.last
     end
 
     def store

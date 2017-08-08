@@ -41,3 +41,5 @@ bower.json
 
 .DS_Store
 .rake_tasks~
+/public/packs
+/node_modules

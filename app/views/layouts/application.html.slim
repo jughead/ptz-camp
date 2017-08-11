@@ -6,7 +6,9 @@ html
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    = render 'layouts/header'
-    .container
-      = render 'layouts/flash_messages'
-      = yield
+    .full-height
+      = render 'layouts/header'
+      .container.main
+        = render 'layouts/flash_messages'
+        = yield
+    = render 'layouts/footer'

@@ -18,14 +18,20 @@ Rails.application.routes.draw do
         resources :delegations
         resources :day_schedules, only: [:index, :edit, :update]
         resources :participants
+        resources :pages, except: [:show]
       end
+      resources :pages, except: [:show]
     end
   end
 
-  resources :camps, path: '', param: :slug, only: :show do
+  resources :camps, path: '', param: :slug, only: [] do
     resource :schedule, controller: :schedule, only: :show
     resources :participants, only: [:new, :index, :create, :edit, :update, :show]
+    resources :pages, path: '', param: :slug, only: :show
   end
+
+  resources :camps, path: '', param: :slug, only: :show, constraints: CampConstraint.new
+  resources :pages, path: '', param: :slug, only: :show, constraints: GlobalPageConstraint.new
 
   root to: 'site#home'
 end

@@ -2,6 +2,7 @@ class Camp < ApplicationRecord
   has_many :day_schedules, dependent: :destroy
   has_many :delegations, dependent: :destroy
   has_many :participants, dependent: :destroy
+  has_many :pages, dependent: :destroy
 
   after_create :create_day_schedules
 
@@ -10,6 +11,7 @@ class Camp < ApplicationRecord
   validates :slug, presence: true, uniqueness: true
   validates :start_date, presence: true
   validates :finish_date, presence: true
+  validates_with Camps::SlugValidator
 
   add_command :create_day_schedules
   add_command :build_participant

@@ -97,6 +97,7 @@ end
 group :production do
   # Use Uglifier as compressor for JavaScript assets
   gem 'uglifier', '>= 1.3.0'
+  gem 'redis-rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

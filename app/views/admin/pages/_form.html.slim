@@ -1,0 +1,14 @@
+= simple_form_for @page, url: [:admin, @page] do |f|
+  = f.input :state, as: :select, collection: Page.states.keys, default: Page.states.first
+  = f.input :title, as: :string
+  = f.input :content
+  = f.input :slug do
+    div
+      = request.protocol
+      = request.host_with_port
+      | /&nbsp;
+      = f.input_field :slug
+    = f.error :slug
+  = f.input :order
+  = f.input :camp_id, as: :hidden
+  = f.button :submit, class: 'btn btn-primary'

@@ -11,6 +11,7 @@ nav.navbar.navbar-inverse
       ul.nav.navbar-nav
         li = link_to 'Messages', admin_messages_path if can?(:index, Message)
         li = link_to 'Camps', admin_camps_path if can?(:index, Camp)
+        li = link_to 'Global Pages', admin_pages_path if can?(:index, Page)
         - if @camp&.persisted?
           li
             = link_to '#', class: 'dropdown-toggle', data: {toggle: 'dropdown'} do
@@ -20,6 +21,7 @@ nav.navbar.navbar-inverse
               li = link_to 'Delegations', @camp.delegations_path if can?(:index, Delegation)
               li = link_to 'Schedule', @camp.day_schedules_path if can?(:index, DaySchedule)
               li = link_to 'Participants', [:admin, @camp, :participants] if can?(:index, Participant)
+              li = link_to 'Pages', [:admin, @camp, :pages] if can?(:index, Page)
 
       ul.nav.navbar-nav.navbar-right
         li = link_to 'Site', root_path

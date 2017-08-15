@@ -1,0 +1,7 @@
+- if @camp
+  = cache([@camp, :page_menu], expires_in: 1.minute) do
+    - @camp.pages.each do |page|
+      li = link_to page.title, [@camp, page]
+= cache(:global_page_menu, expires_in: 1.minute) do
+  - PageDecorator.decorate_collection(Page.global.menu).each do |page|
+    li = link_to page.title, page

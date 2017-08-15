@@ -3,13 +3,11 @@ module CampLoader
 
   class_methods do
     def load_camp
-      before_action :load_camp
+      load_resource id_param: :slug, find_by: :slug
+    end
+
+    def load_camp_parent
+      load_resource :camp, id_param: :camp_slug, find_by: :slug
     end
   end
-
-  private
-
-    def load_camp
-      @camp = CampFinder.new.find_by_slug!(params[:slug] || params[:camp_slug])
-    end
 end

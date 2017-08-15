@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170712054322) do
+ActiveRecord::Schema.define(version: 20170814074607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,18 @@ ActiveRecord::Schema.define(version: 20170712054322) do
     t.integer  "recipient_id",   null: false
     t.index ["message_id"], name: "index_notifications_on_message_id", using: :btree
     t.index ["recipient_type", "recipient_id", "message_id"], name: "index_recipient_message_on_notifications_uniq", unique: true, using: :btree
+  end
+
+  create_table "pages", force: :cascade do |t|
+    t.integer  "camp_id"
+    t.integer  "state"
+    t.text     "title"
+    t.text     "content"
+    t.string   "slug"
+    t.integer  "order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["camp_id"], name: "index_pages_on_camp_id", using: :btree
   end
 
   create_table "participants", force: :cascade do |t|
@@ -166,6 +178,7 @@ ActiveRecord::Schema.define(version: 20170712054322) do
   add_foreign_key "day_schedules", "camps"
   add_foreign_key "delegations", "camps"
   add_foreign_key "identities", "users"
+  add_foreign_key "pages", "camps"
   add_foreign_key "participants", "camps"
   add_foreign_key "participants", "delegations"
   add_foreign_key "participants", "users"

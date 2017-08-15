@@ -1,5 +1,5 @@
 class ParticipantsController < ApplicationController
-  load_camp
+  load_camp_parent
   decorate_current_camp
   load_and_authorize_resource through: :camp, only: [:edit, :show, :update]
 

@@ -1,5 +1,5 @@
 class ScheduleController < ApplicationController
-  load_camp
+  load_camp_parent
   decorate_current_camp
   before_action :load_day_schedules
 

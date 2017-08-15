@@ -1,0 +1,28 @@
+- if @camp
+  = link_to 'Back to camp', [:admin, @camp]
+br
+- if @camp
+  - url = [:new, :admin, @camp, :page]
+- else
+  - url = [:new, :admin, :page]
+
+= link_to 'New page', url, class: 'btn btn-primary'
+hr
+
+table.table
+  thead
+    tr
+      th.col-xs-1 #
+      th.col-xs-4 Page
+      th.col-xs-1 State
+      th.col-xs-6 Actions
+  tbody
+    - @pages.each do |page|
+      tr
+        td = page.id
+        td = link_to page.title, page.front_path, target: '_blank'
+        td = page.state
+        td
+          = link_to 'Edit', edit_admin_page_path(page), class: 'btn btn-xs btn-success' if can?(:edit, page)
+          = link_to 'Destroy', admin_page_path(page), data: {method: :delete, confirm: 'Are you sure you want to remove the page?'}, class: 'btn btn-xs btn-danger' if can?(:destroy, page)
+

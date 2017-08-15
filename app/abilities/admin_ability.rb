@@ -12,6 +12,7 @@ class AdminAbility
     day_schedule_rules
     participant_rules
     messages_rules
+    page_rules
   end
 
   def can(a, c, *args, &block)
@@ -45,5 +46,9 @@ class AdminAbility
   def participant_rules
     can [:index, :edit, :update, :show], Participant
     can :destroy, Participant if user.superadmin?
+  end
+
+  def page_rules
+    can [:index, :edit, :update, :show, :create, :new, :destroy], Page
   end
 end

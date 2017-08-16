@@ -17,10 +17,10 @@ module Admin
     end
 
     def badge_info
-      "#{title},<br/>".html_safe + shortened_date_range
+      "#{title},<br/>".html_safe + date_range
     end
 
-    def shortened_date_range
+    def date_range
       "#{I18n.l start_date, format: '%B, %d'} &mdash; #{I18n.l finish_date, format: '%B, %d'}".html_safe
     end
   end

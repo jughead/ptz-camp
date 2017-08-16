@@ -6,7 +6,11 @@ module Camps
     end
 
     def execute
-      @camp.participants.where(user: @user).first_or_initialize
+      if @user.guest?
+        Participant.new(camp: @camp, user: @user)
+      else
+        @camp.participants.where(user: @user).first_or_initialize
+      end
     end
   end
 end

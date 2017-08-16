@@ -8,7 +8,7 @@ class Participant < ApplicationRecord
   mount_uploader :passport_scan, PassportScanUploader
   enum tshirt: [:xs, :s, :m, :l, :xl, :xxl]
 
-  validates :user, presence: true
+  validates :user, presence: true, on: :user
   validates :name, presence: true
   validates :tshirt, presence: true
   validates :delegation, presence: true
@@ -17,10 +17,16 @@ class Participant < ApplicationRecord
   validates :camp_id, presence: true
   validates_associated :personal
 
-  delegate :name, to: :user
-
   def user
     super || GuestUser.instance
+  end
+
+  def name
+    (personal.first_name.to_s + " " + personal.last_name.to_s).strip
+  end
+
+  def self.roles
+    @roles ||= [:participant, :coach, :guest].freeze
   end
 
 end

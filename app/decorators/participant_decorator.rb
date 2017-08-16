@@ -1,18 +1,19 @@
 class ParticipantDecorator < ApplicationDecorator
+  include ActiveModel::AttributeAssignment
+  decorates_finders
+
   def role
-    participant.has_role?(:coach) ? 'Coach' : 'Participant'
+    @role ||= (roles.first&.name || :participant).to_s.capitalize
   end
 
   def role=(value)
-    case value
-    when 'Coach'
-      participant.add_role(:coach)
-    when 'Participant'
-      participant.remove_role(:coach)
-    end
+    @role = nil
+    roles.delete_all if persisted?
+    role = value.downcase.to_sym
+    add_role(role) if Participant.roles.include?(role)
   end
 
-  def update(attributes)
+  def assign_attributes(attributes)
     remaining = {}
     attributes.each do |attr, val|
       if respond_to?("#{attr}=")
@@ -21,12 +22,20 @@ class ParticipantDecorator < ApplicationDecorator
         remaining[attr] = val
       end
     end
-    assign_attributes(remaining)
+    object.assign_attributes(remaining)
+  end
+
+  def update(attributes)
+    assign_attributes(attributes)
     save
   end
 
   def school
     participant.delegation.name
+  end
+
+  def self.roles
+    @roles ||= Participant.roles.map{|r| r.to_s.capitalize}.freeze
   end
 
   delegate :first_name, :last_name, to: :personal

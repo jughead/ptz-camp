@@ -56,7 +56,7 @@ class ParticipantForm
     end
 
     def validate
-      @participant.valid?
+      @participant.valid? && @participant.valid?(:user)
       @participant.user.valid? if requires_registration?
     end
 

@@ -1,7 +1,7 @@
-= simple_form_for @page, url: [:admin, @page] do |f|
+= simple_form_for @page, html: { data: { remote: true } }, url: [:admin, @page] do |f|
   = f.input :state, as: :select, collection: Page.states.keys, default: Page.states.first
   = f.input :title, as: :string
-  = f.input :content
+  = f.input :content, input_html: { rows: 25 }
   = f.input :slug do
     div
       = request.protocol
@@ -12,3 +12,4 @@
   = f.input :order
   = f.input :camp_id, as: :hidden
   = f.button :submit, class: 'btn btn-primary'
+  = link_to 'Open', @page.front_path, class: 'btn btn-success', target: '_blank' if @page.persisted?

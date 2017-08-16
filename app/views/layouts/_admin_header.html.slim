@@ -12,6 +12,7 @@ nav.navbar.navbar-inverse
         li = link_to 'Messages', admin_messages_path if can?(:index, Message)
         li = link_to 'Camps', admin_camps_path if can?(:index, Camp)
         li = link_to 'Global Pages', admin_pages_path if can?(:index, Page)
+        li = link_to 'Files', admin_public_files_path if can?(:index, PublicFile)
         - if @camp&.persisted?
           li
             = link_to '#', class: 'dropdown-toggle', data: {toggle: 'dropdown'} do

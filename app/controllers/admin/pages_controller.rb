@@ -17,7 +17,7 @@ class Admin::PagesController < Admin::ApplicationController
   def update
     if @page.update(update_params)
       Rails.cache.clear
-      redirect_to({action: :index}, notice: 'The page is updated')
+      redirect_to({action: :edit}, notice: 'The page is updated')
     else
       render :new
     end
@@ -26,7 +26,7 @@ class Admin::PagesController < Admin::ApplicationController
   def create
     if @page.save
       Rails.cache.clear
-      redirect_to({action: :index}, notice: 'The page is added')
+      redirect_to([:edit, :admin, @page], notice: 'The page is added')
     else
       render :new
     end

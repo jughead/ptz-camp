@@ -1,4 +1,4 @@
-= link_to 'Back to delegations', [:admin, @camp, :delegations]
+= link_to 'Back to delegations', (request.referer || [:admin, @camp, :delegations])
 br
 h2 = @delegation.name
 
@@ -11,6 +11,4 @@ dl
 
 h2 Registered participants
 
-- @participants.each do |participant|
-  = link_to participant.name, '#'
-  br
+= render 'admin/participants/list'

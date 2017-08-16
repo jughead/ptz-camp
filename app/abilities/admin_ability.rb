@@ -26,6 +26,15 @@ class AdminAbility
     end
   end
 
+  def can?(a, c)
+    case c
+    when Draper::CollectionDecorator, Draper::Decorator
+      can?(a, c.object)
+    else
+      super
+    end
+  end
+
   def camp_rules
     can [:index, :badges, :show, :new, :edit, :create, :update, :dashboard], Camp
   end
@@ -45,7 +54,7 @@ class AdminAbility
   end
 
   def participant_rules
-    can [:index, :edit, :update, :show], Participant
+    can [:index, :new, :create, :edit, :update, :show], Participant
     can :destroy, Participant if user.superadmin?
   end
 

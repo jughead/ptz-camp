@@ -36,7 +36,7 @@ class Admin::DelegationsController < Admin::ApplicationController
   end
 
   def show
-    @participants = @delegation.participants
+    @participants = Admin::ParticipantDecorator.decorate_collection(@delegation.participants)
   end
 
   private

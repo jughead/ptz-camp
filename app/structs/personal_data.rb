@@ -1,5 +1,6 @@
 class PersonalData < ApplicationStruct
   include ActiveModel::Validations
+  include ActiveModel::Dirty
 
   def self.attributes
     @attributes ||= [:passport_number,

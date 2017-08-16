@@ -21,6 +21,7 @@ Rails.application.routes.draw do
         resources :pages, except: [:show]
       end
       resources :pages, except: [:show]
+      resources :public_files, path: :files, except: [:show]
     end
   end
 

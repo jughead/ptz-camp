@@ -1,0 +1,7 @@
+= link_to 'Back to files', [:admin, :public_files]
+br
+h2 Create file
+= simple_form_for @file, url: [:admin, @file] do |f|
+  = f.input :data
+  = f.button :submit, class: 'btn btn-primary'
+

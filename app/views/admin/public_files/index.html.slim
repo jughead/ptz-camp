@@ -1,0 +1,20 @@
+h2 Files
+
+= link_to 'New file', [:new, :admin, :public_file], class: 'btn btn-primary'
+hr
+
+table.table
+  thead
+    tr
+      th.col-xs-1 #
+      th.col-xs-5 Title
+      th.col-xs-6 Actions
+  tbody
+    - @files.each do |file|
+      tr
+        td = file.id
+        td = link_to file.title, file.data_url, target: '_blank'
+        td
+          = link_to 'Edit', edit_admin_public_file_path(file), class: 'btn btn-xs btn-success' if can?(:edit, file)
+          = link_to 'Destroy', admin_public_file_path(file), data: {method: :delete, confirm: 'Are you sure you want to remove the file?'}, class: 'btn btn-xs btn-danger' if can?(:destroy, file)
+

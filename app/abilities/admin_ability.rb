@@ -13,6 +13,7 @@ class AdminAbility
     participant_rules
     messages_rules
     page_rules
+    public_files_rules
   end
 
   def can(a, c, *args, &block)
@@ -49,6 +50,10 @@ class AdminAbility
   end
 
   def page_rules
-    can [:index, :edit, :update, :show, :create, :new, :destroy], Page
+    can [:index, :edit, :update, :create, :new, :destroy], Page
+  end
+
+  def public_files_rules
+    can [:index, :edit, :update, :create, :new, :destroy], PublicFile
   end
 end

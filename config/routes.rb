@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       resources :camps do
         member do
           get :dashboard
+          get :badges
         end
         resources :delegations
         resources :day_schedules, only: [:index, :edit, :update]

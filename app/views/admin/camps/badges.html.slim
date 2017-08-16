@@ -1,0 +1,24 @@
+- @participants.each do |participant|
+  .camp-badge
+    .camp-badge_header
+      div
+        = image_tag 'petrsu.svg'
+      .camp-badge_header-title Petrozavodsk State University
+    .camp-badge_body
+      .camp-badge_body-role
+        = participant.role
+      .camp-badge_body-name
+        = participant.first_name
+        br
+        = participant.last_name
+      .camp-badge_body-school
+        = participant.school
+      .camp-badge_body-camp
+        = @camp.badge_info
+    .camp-badge_footer
+      = image_tag 'icpc_logo.png', class: 'icpc'
+      /.sponsors
+        = image_tag 'yandex.png', class: 'camp-badge_footer-sponsor yandex'
+        = image_tag 'aim_tech.png', class: 'camp-badge_footer-sponsor aim_tech'
+        = image_tag 'botan.png', class: 'camp-badge_footer-sponsor botan'
+        = image_tag 'huawei.png', class: 'camp-badge_footer-sponsor huawei'

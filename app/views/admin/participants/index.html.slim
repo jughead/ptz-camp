@@ -7,13 +7,15 @@ table.table
       th.col-xs-1 #
       th.col-xs-1 User Id
       th.col-xs-5 Name
-      th.col-xs-5 Actions
+      th.col-xs-1 Role
+      th.col-xs-4 Actions
   tbody
     - @participants.each do |participant|
       tr
         td = participant.id
         td = participant.user_id
         td = link_to participant.name, admin_camp_participant_path(@camp, participant) if can?(:show, participant)
+        td = participant.role
         td
           = link_to 'Edit', edit_admin_camp_participant_path(@camp, participant), class: 'btn btn-xs btn-success' if can?(:edit, participant)
           = link_to 'Destroy', admin_camp_participant_path(@camp, participant), data: {method: :delete, confirm: 'Are you sure you want to delete participant? All their data will not be available to recover later.'}, class: 'btn btn-xs btn-danger' if can?(:destroy, participant)

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Admin::CampsController < Admin::ApplicationController
   load_and_authorize_resource :camp
   decorate_current_camp
@@ -35,6 +36,11 @@ class Admin::CampsController < Admin::ApplicationController
 
   def dashboard
     @participants = @camp.participants
+  end
+
+  def badges
+    @participants = @camp.participants
+    render :badges, layout: 'badges'
   end
 
   private

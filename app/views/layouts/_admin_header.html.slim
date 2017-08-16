@@ -23,6 +23,7 @@ nav.navbar.navbar-inverse
               li = link_to 'Schedule', @camp.day_schedules_path if can?(:index, DaySchedule)
               li = link_to 'Participants', [:admin, @camp, :participants] if can?(:index, Participant)
               li = link_to 'Pages', [:admin, @camp, :pages] if can?(:index, Page)
+              li = link_to 'Badges', [:badges, :admin, @camp], target: '_blank' if can?(:badges, @camp)
 
       ul.nav.navbar-nav.navbar-right
         li = link_to 'Site', root_path

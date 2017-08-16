@@ -1,4 +1,5 @@
 = simple_form_for [:admin, @camp, participant] do |f|
+  = f.input :role, as: :select, collection: %w[Participant Coach]
   = f.input :arrival, as: :date, order: [:day, :month, :year], default: @camp.start_date
   = f.input :departure, as: :date, order: [:day, :month, :year], default: @camp.finish_date
   = f.fields_for :personal, f.object.personal do |ff|

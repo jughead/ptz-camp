@@ -1,0 +1,127 @@
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+@page {
+  size: 99.5mm 127.5mm; /* 141.5mm */
+  margin: 0mm 0mm 0mm 0mm;
+}
+
+@media screen {
+  .camp-badge {
+    width: 9.95cm;
+    height: 127.5mm;
+  }
+}
+
+@media print {
+  .camp-badge {
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+}
+
+.camp-badge {
+  font-family: PT Sans;
+}
+
+.camp-badge_body {
+  margin-top: 10%;
+  div {
+    display: block;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.camp-badge_body-name {
+  font-size: 22pt;
+  font-weight: bold;
+  margin-top: 5%;
+  margin-bottom: 7%;
+}
+.camp-badge_body-role {
+  font-size: 12pt;
+}
+.camp-badge_body-school {
+  font-size: 14pt;
+}
+.camp-badge_body-camp {
+  font-size: 10pt;
+  margin-top: 10%;
+  margin-bottom: 5%;
+}
+
+.camp-badge_footer {
+  margin-left: auto;
+  margin-right: auto;
+
+  .icpc {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    display: block;
+  }
+
+  .sponsors {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+}
+
+.camp-badge_footer-sponsor {
+  vertical-align: middle;
+  display: inline;
+  max-height: 11%;
+  margin-left: 3%;
+
+  &:first-of-type {
+    margin-left: 10%;
+  }
+
+  &:last-of-type {
+    margin-left: 0;
+  }
+
+  &.yandex {
+    max-width: 24%;
+  }
+  &.aim_tech {
+    max-width: 10%;
+  }
+  &.botan {
+    max-width: 20%;
+  }
+  &.huawei {
+    max-width: 21%;
+  }
+}
+
+.camp-badge_header {
+  padding-top: 2%;
+  height: 20%;
+  min-height: 20%;
+  display: table;
+  width: 100%;
+  background-color: red;
+  -webkit-print-color-adjust: exact;
+
+  div {
+    font-size: 13pt;
+    font-family: PT Sans;
+    text-transform: uppercase;
+    color: white;
+    display: table-cell;
+    vertical-align: middle;
+  }
+  img {
+    padding-top: 1%;
+    padding-left: 12%;
+  }
+  .camp-badge_header-title {
+    padding-left: 20px;
+  }
+}

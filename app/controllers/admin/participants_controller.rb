@@ -71,12 +71,23 @@ class Admin::ParticipantsController < Admin::ApplicationController
     def load_resource
       if %w[index].include?(action_name)
         @participants = @camp.participants.accessible_by(current_ability)
-        @participants = @participants.where(delegation_id: params[:delegation_id])  if params[:delegation_id]
+        @participants = @participants.where(delegation_id: params[:delegation_id]) if params[:delegation_id]
+        apply_order
         @participants = decorator.decorate_collection(@participants)
       else
         @participant = @camp.participants.find_by(id: params[:id])
         @participant &&= decorator.decorate(@participant)
       end
+    end
+
+    def apply_order
+      @participants = @participants.order(
+        case params[:order_by]
+        when 'delegation' then "delegation_id, personal->>'first_name', personal->>'last_name'"
+        when 'name' then "personal->>'first_name', personal->>'last_name'"
+        else
+          {created_at: :desc}
+        end)
     end
 
     def authorize

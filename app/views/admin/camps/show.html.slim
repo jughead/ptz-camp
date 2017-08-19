@@ -6,3 +6,18 @@ h2 Schedule
 ul
   - @camp.day_schedules.each do |day|
     li = link_to day.date, day.edit_path
+
+h2 T-Shirts
+
+table.table
+  thead
+    tr
+      th Delegation
+      - Participant.tshirts.each do |tshirt, _id|
+        th #{tshirt}
+  tbody
+    - DelegationTshirtCountQuery.new(@camp).query.each do |delegation|
+      tr
+        td = delegation.name
+        - Participant.tshirts.each do |tshirt, _id|
+          th = delegation[:"#{tshirt}_count"]

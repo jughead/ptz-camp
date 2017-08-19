@@ -19,6 +19,7 @@ nav.navbar.navbar-inverse
               = @camp.title
               <b class="caret"></b>
             ul.dropdown-menu.multi-level
+              li = link_to 'Camp', [:admin, @camp]
               li = link_to 'Delegations', @camp.delegations_path if can?(:index, Delegation)
               li = link_to 'Schedule', @camp.day_schedules_path if can?(:index, DaySchedule)
               li = link_to 'Participants', [:admin, @camp, :participants] if can?(:index, Participant)

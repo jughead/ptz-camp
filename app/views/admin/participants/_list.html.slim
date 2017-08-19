@@ -9,13 +9,15 @@ br
 table.table
   thead
     tr
-      th.col-xs-1 #
-      th.col-xs-1 User Id
-      th.col-xs-4 Name
+      th #
+      th User Id
+      th Name
       - unless @delegation
-        th.col-xs-1 Delegation
-      th.col-xs-1 Role
-      th.col-xs-4 Actions
+        th Delegation
+      th T-Shirt
+      th Role
+      th Registered At
+      th Actions
   tbody
     - @participants.each do |participant|
       tr
@@ -24,7 +26,9 @@ table.table
         td = link_to participant.name, admin_camp_participant_path(@camp, participant) if can?(:show, participant)
         - unless @delegation
           td = participant.delegation.name
+        td = participant.tshirt
         td = participant.role
+        td = l participant.created_at, format: "%c"
         td
           = link_to 'Edit', edit_admin_camp_participant_path(@camp, participant), class: 'btn btn-xs btn-success' if can?(:edit, participant)
           = link_to 'Destroy', admin_camp_participant_path(@camp, participant), data: {method: :delete, confirm: 'Are you sure you want to delete participant? All their data will not be available to recover later.'}, class: 'btn btn-xs btn-danger' if can?(:destroy, participant)

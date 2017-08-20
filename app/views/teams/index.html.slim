@@ -1,0 +1,11 @@
+h1 Teams
+
+table.table
+  tbody
+    - @teams.each_with_index do |team, ind|
+      tr
+        td
+          = ind + 1
+          | .&nbsp;
+          = team.full_name
+

@@ -3,6 +3,7 @@ class Camp < ApplicationRecord
   has_many :delegations, dependent: :destroy
   has_many :participants, dependent: :destroy
   has_many :pages, dependent: :destroy
+  has_many :teams, dependent: :destroy
 
   after_create :create_day_schedules
 
@@ -18,5 +19,9 @@ class Camp < ApplicationRecord
 
   def schedule
     @schedule ||= Schedule.new(self)
+  end
+
+  def not_started?
+    Time.current < start_date
   end
 end

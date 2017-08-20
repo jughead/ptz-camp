@@ -20,6 +20,7 @@ Rails.application.routes.draw do
         resources :day_schedules, only: [:index, :edit, :update]
         resources :participants
         resources :pages, except: [:show]
+        resources :teams, except: [:show]
       end
       resources :pages, except: [:show]
       resources :public_files, path: :files, except: [:show]
@@ -29,6 +30,7 @@ Rails.application.routes.draw do
   resources :camps, path: '', param: :slug, only: [] do
     resource :schedule, controller: :schedule, only: :show
     resources :participants, only: [:new, :index, :create, :edit, :update, :show]
+    resources :teams, only: [:index]
     resources :pages, path: '', param: :slug, only: :show
   end
 

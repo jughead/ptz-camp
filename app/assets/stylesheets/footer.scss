@@ -40,6 +40,7 @@ footer p {
 
 footer img {
   max-width: 100%;
+  max-height: $footer-height*0.95;
 }
 
 footer h4 {
@@ -53,5 +54,9 @@ footer h4 {
 }
 
 .sponsors {
-  padding-left: 40px;
+  padding-left: 10px;
+}
+
+.sponsors-title {
+  padding-left: 4%;
 }

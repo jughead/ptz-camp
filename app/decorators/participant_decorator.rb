@@ -34,6 +34,10 @@ class ParticipantDecorator < ApplicationDecorator
     participant.delegation.name
   end
 
+  def name_with_delegation
+    "#{first_name} #{last_name} (#{delegation&.name})"
+  end
+
   def self.roles
     @roles ||= Participant.roles.map{|r| r.to_s.capitalize}.freeze
   end

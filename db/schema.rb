@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170816084435) do
+ActiveRecord::Schema.define(version: 20170820141127) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,8 +103,10 @@ ActiveRecord::Schema.define(version: 20170816084435) do
     t.integer  "tshirt"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "team_id"
     t.index ["camp_id"], name: "index_participants_on_camp_id", using: :btree
     t.index ["delegation_id"], name: "index_participants_on_delegation_id", using: :btree
+    t.index ["team_id"], name: "index_participants_on_team_id", using: :btree
     t.index ["user_id"], name: "index_participants_on_user_id", using: :btree
   end
 
@@ -140,6 +142,17 @@ ActiveRecord::Schema.define(version: 20170816084435) do
     t.datetime "updated_at"
     t.index ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
     t.index ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.integer  "camp_id"
+    t.integer  "delegation_id"
+    t.string   "name"
+    t.boolean  "with_laptop"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["camp_id"], name: "index_teams_on_camp_id", using: :btree
+    t.index ["delegation_id"], name: "index_teams_on_delegation_id", using: :btree
   end
 
   create_table "telegram_groups", force: :cascade do |t|
@@ -197,4 +210,6 @@ ActiveRecord::Schema.define(version: 20170816084435) do
   add_foreign_key "participants", "camps"
   add_foreign_key "participants", "delegations"
   add_foreign_key "participants", "users"
+  add_foreign_key "teams", "camps"
+  add_foreign_key "teams", "delegations"
 end

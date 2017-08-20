@@ -1,0 +1,6 @@
+= simple_form_for @team, url: [:admin, @camp, @team] do |f|
+  = f.input :name
+  = f.input :with_laptop
+  = f.association :delegation, as: :select, collection: @camp.delegations.ordered_by_name
+  = f.association :participants, as: :check_boxes, collection: @camp.participants_without_teams(@team)
+  = f.button :submit, class: 'btn btn-primary'

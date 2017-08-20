@@ -2,6 +2,7 @@ class Participant < ApplicationRecord
   belongs_to :camp
   belongs_to :delegation
   belongs_to :user, inverse_of: :participations
+  belongs_to :team
   rolify
 
   attribute :personal, :personal_data, default: {}
@@ -16,6 +17,10 @@ class Participant < ApplicationRecord
   validates :camp, presence: true
   validates :camp_id, presence: true
   validates_associated :personal
+
+  scope :without_team, ->(team=nil) { Participants::WithoutTeamQuery.new(team).query }
+  scope :ordered_by_delegation, -> { order(:delegation_id) }
+  scope :ordered_by_name, -> { order("personal->>'first_name', personal->>'last_name'")}
 
   def user
     super || GuestUser.instance

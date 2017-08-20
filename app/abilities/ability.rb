@@ -6,6 +6,7 @@ class Ability
     @user = user
     participants_rules
     pages_rules
+    teams_rules
   end
 
   def can(a, c, *args, &block)
@@ -19,7 +20,7 @@ class Ability
 
   def participants_rules
     can :sign_up, Camp do |camp|
-      user.participations.where(camp_id: camp.id).blank?
+      camp.not_started? && user.participations.where(camp_id: camp.id).blank?
     end
 
     can [:edit, :update, :show], Participant do |participant|
@@ -30,5 +31,9 @@ class Ability
   def pages_rules
     can :show, Page, state: :openned
     can :show, Page if user.admin?
+  end
+
+  def teams_rules
+    can :index, Team
   end
 end

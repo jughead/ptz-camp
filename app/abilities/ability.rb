@@ -27,6 +27,8 @@ class Ability
     can [:edit, :update, :show], Participant do |participant|
       participant.persisted? && participant.user_id == user.id
     end
+
+    can :index, Participant
   end
 
   def pages_rules

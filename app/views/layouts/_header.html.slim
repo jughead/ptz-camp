@@ -12,6 +12,7 @@ nav.navbar.navbar-default
         - if @camp
           li = link_to 'Schedule', camp_schedule_path(@camp)
           li = link_to 'Teams', camp_teams_path(@camp)
+          li = link_to 'Participants', camp_participants_path(@camp)
         = render 'layouts/page_menu'
       ul.nav.navbar-nav.navbar-right
         - if user_signed_in?

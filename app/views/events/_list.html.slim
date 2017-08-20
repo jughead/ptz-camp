@@ -1,0 +1,12 @@
+- if facade.events.present?
+  h2 Events
+  .event-list
+    - facade.each_event_with_participation do |event, participation|
+      h3 = event.name
+      p
+        == event.description
+        | &nbsp;
+      p
+        = link_to 'Know who already opted in.', [@camp, event]
+      = render 'events/status', participation: participation, event: event if user_signed_in?
+

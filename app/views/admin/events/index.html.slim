@@ -1,0 +1,24 @@
+= link_to 'Back to camp', request.referer || [:admin, @camp]
+
+h2 Events
+
+= link_to 'New Event', [:new, :admin, @camp, :event], class: 'btn btn-primary' if can?(:new, Event)
+
+table.table
+  thead
+    tr
+      th #
+      th Name
+      th Date
+      th Actions
+  tbody
+    - @events.each do |event|
+      tr
+        td = event.id
+        td = event.name
+        td = event.start_at
+        td
+          = link_to 'Edit', edit_admin_camp_event_path(@camp, event), class: 'btn btn-xs btn-success' if can?(:edit, event)
+          = link_to 'Destroy', admin_camp_event_path(@camp, event), data: {method: :delete, confirm: 'Are you sure you want to delete event? All their participations will be deleted.'}, class: 'btn btn-xs btn-danger' if can?(:destroy, event)
+
+

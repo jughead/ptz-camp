@@ -21,6 +21,7 @@ Rails.application.routes.draw do
         resources :participants
         resources :pages, except: [:show]
         resources :teams, except: [:show]
+        resources :events, except: [:show]
       end
       resources :pages, except: [:show]
       resources :public_files, path: :files, except: [:show]
@@ -31,6 +32,12 @@ Rails.application.routes.draw do
     resource :schedule, controller: :schedule, only: :show
     resources :participants, only: [:new, :index, :create, :edit, :update, :show]
     resources :teams, only: [:index]
+    resources :events, only: [:show] do
+      member do
+        post :opt_in
+        post :opt_out
+      end
+    end
     resources :pages, path: '', param: :slug, only: :show
   end
 

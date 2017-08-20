@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170820141127) do
+ActiveRecord::Schema.define(version: 20170820162318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,37 @@ ActiveRecord::Schema.define(version: 20170820141127) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.index ["camp_id"], name: "index_delegations_on_camp_id", using: :btree
+  end
+
+  create_table "event_participations", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "participant_id"
+    t.integer  "state",          null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["event_id"], name: "index_event_participations_on_event_id", using: :btree
+    t.index ["participant_id"], name: "index_event_participations_on_participant_id", using: :btree
+  end
+
+  create_table "event_restrictions", force: :cascade do |t|
+    t.integer  "event1_id"
+    t.integer  "event2_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event1_id"], name: "index_event_restrictions_on_event1_id", using: :btree
+    t.index ["event2_id"], name: "index_event_restrictions_on_event2_id", using: :btree
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.integer  "camp_id"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "start_at"
+    t.integer  "position"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["camp_id"], name: "index_events_on_camp_id", using: :btree
+    t.index ["position"], name: "index_events_on_position", using: :btree
   end
 
   create_table "identities", force: :cascade do |t|
@@ -205,6 +236,11 @@ ActiveRecord::Schema.define(version: 20170820141127) do
 
   add_foreign_key "day_schedules", "camps"
   add_foreign_key "delegations", "camps"
+  add_foreign_key "event_participations", "events"
+  add_foreign_key "event_participations", "participants"
+  add_foreign_key "event_restrictions", "events", column: "event1_id"
+  add_foreign_key "event_restrictions", "events", column: "event2_id"
+  add_foreign_key "events", "camps"
   add_foreign_key "identities", "users"
   add_foreign_key "pages", "camps"
   add_foreign_key "participants", "camps"

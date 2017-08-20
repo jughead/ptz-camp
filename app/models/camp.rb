@@ -4,6 +4,7 @@ class Camp < ApplicationRecord
   has_many :participants, dependent: :destroy
   has_many :pages, dependent: :destroy
   has_many :teams, dependent: :destroy
+  has_many :events, dependent: :destroy
 
   after_create :create_day_schedules
 

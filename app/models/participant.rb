@@ -3,6 +3,7 @@ class Participant < ApplicationRecord
   belongs_to :delegation
   belongs_to :user, inverse_of: :participations
   belongs_to :team
+  has_many :event_participations, dependent: :destroy
   rolify
 
   attribute :personal, :personal_data, default: {}

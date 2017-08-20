@@ -8,5 +8,7 @@ class CampsController < ApplicationController
     else
       @participant = @camp.build_participant(current_user).decorate
     end
+
+    @events_facade = EventsFacade.new(@camp, current_user)
   end
 end

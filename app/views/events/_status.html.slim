@@ -1,0 +1,14 @@
+.event-option-buttons
+  - can_opt_in  = can?(:opt_in, event)
+  - can_opt_out = can?(:opt_out, event)
+  - if participation
+    - if participation.goes?
+      span.text-success = participation.status
+    - else
+      span.text-danger = participation.status
+    | &nbsp;
+    = link_to 'Change decision', 'javascript:void(0)', data: {action: 'event-change-decision' } if can_opt_in || can_opt_out
+  .button-group class=('hide' if participation)
+    = link_to 'I am in', [:opt_in, @camp, event], class: 'btn btn-success', data: { remote: true, method: :post, action: 'event-opt-in' } if can_opt_in
+    | &nbsp;
+    = link_to 'No, thanks', [:opt_out, @camp, event], class: 'btn btn-danger', data: { remote: true, method: :post, action: 'event-opt-out' } if can_opt_out

@@ -16,5 +16,6 @@
 //= require turbolinks
 //= require_tree ./participants
 //= require_tree ./utils
+//= require events
 
 window.ptzcamp.participants.Form.register()

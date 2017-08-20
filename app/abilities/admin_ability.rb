@@ -14,7 +14,8 @@ class AdminAbility
     messages_rules
     page_rules
     public_files_rules
-    team_rules
+    teams_rules
+    events_rules
   end
 
   def can(a, c, *args, &block)
@@ -67,7 +68,11 @@ class AdminAbility
     can [:index, :edit, :update, :create, :new, :destroy], PublicFile
   end
 
-  def team_rules
+  def teams_rules
     can [:index, :edit, :update, :create, :new, :destroy], Team
+  end
+
+  def events_rules
+    can [:index, :edit, :update, :create, :new, :destroy], Event
   end
 end

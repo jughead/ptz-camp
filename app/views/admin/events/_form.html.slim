@@ -1,0 +1,7 @@
+= simple_form_for @event, url: [:admin, @camp, @event] do |f|
+  = f.input :name
+  = f.input :description
+  = f.input :start_at
+  = f.input :position
+  = f.association :restricted_events, as: :check_boxes, collection: @events
+  = f.button :submit, class: 'btn btn-primary'

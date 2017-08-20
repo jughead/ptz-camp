@@ -1,0 +1,11 @@
+h1 Participants
+
+table
+  tbody
+    - @participants.each_with_index do |participant, ind|
+      tr
+        td
+          = ind + 1
+          | .&nbsp;
+          = participant.name_with_delegation
+

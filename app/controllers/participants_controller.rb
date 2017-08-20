@@ -1,7 +1,7 @@
 class ParticipantsController < ApplicationController
   load_camp_parent
   decorate_current_camp
-  load_and_authorize_resource through: :camp, only: [:edit, :show, :update]
+  load_and_authorize_resource through: :camp, only: [:edit, :show, :update, :index]
 
   def new
     authorize! :sign_up, @camp
@@ -9,7 +9,7 @@ class ParticipantsController < ApplicationController
   end
 
   def index
-    redirect_to action: :new
+    @participants = @participants.ordered_by_delegation.ordered_by_name.decorate
   end
 
   def create

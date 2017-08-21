@@ -43,6 +43,7 @@ class Ability
   def events_rules
     if user.persisted?
       can :opt_in, Event do |event|
+        event.camp.participants.where(user: user).any? &&
         EventParticipation.joins(:event).
           merge(Event.where(camp_id: event.camp_id)).
           goes.joins(:participant).merge(
@@ -54,6 +55,7 @@ class Ability
       end
 
       can :opt_out, Event do |event|
+        event.camp.participants.where(user: user).any? &&
         EventParticipation.goes.joins(:participant).
           where(event_id: event).merge(
             Participant.where(user: user)

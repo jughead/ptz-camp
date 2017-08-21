@@ -12,9 +12,15 @@ module Users
       end
     end
 
+    private
+
     def load_participant
       @camp = CampFinder.new.current.find.decorate
       @participant = @camp.build_participant(current_user).decorate
+    end
+
+    def sign_up_params
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
   end
 end

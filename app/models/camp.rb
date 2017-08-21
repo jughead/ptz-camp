@@ -1,4 +1,6 @@
 class Camp < ApplicationRecord
+  enum registration: [:openned, :closed], _prefix: true
+
   has_many :day_schedules, dependent: :destroy
   has_many :delegations, dependent: :destroy
   has_many :participants, dependent: :destroy
@@ -20,9 +22,5 @@ class Camp < ApplicationRecord
 
   def schedule
     @schedule ||= Schedule.new(self)
-  end
-
-  def not_started?
-    Time.current < start_date
   end
 end

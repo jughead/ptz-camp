@@ -46,7 +46,7 @@ class Admin::CampsController < Admin::ApplicationController
   private
 
     def update_params
-      params.require(:camp).permit(:title, :slug, :telegram_intro, :front_page)
+      params.require(:camp).permit(:title, :slug, :telegram_intro, :front_page, :registration)
     end
 
     def create_params

@@ -1,7 +1,8 @@
 .col-xs-12
-  = simple_form_for @camp, url: (@camp.persisted? ? admin_camp_path(@camp) : admin_camps_path) do |f|
+  = simple_form_for @camp, url: [:admin, @camp] do |f|
     = f.input :start_date, disabled: @camp.persisted?
     = f.input :finish_date, disabled: @camp.persisted?
+    = f.input :registration, as: :radio_buttons, collection: Camp.registrations.map(&:first)
     = f.input :title
     = f.input :slug
     = f.input :front_page, input_html: { class: 'ckeditor' }

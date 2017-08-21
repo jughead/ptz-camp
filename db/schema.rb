@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170820162318) do
+ActiveRecord::Schema.define(version: 20170821174152) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,7 +24,9 @@ ActiveRecord::Schema.define(version: 20170820162318) do
     t.date     "start_date",     default: '2017-01-30', null: false
     t.date     "finish_date",    default: '2017-02-09', null: false
     t.text     "front_page"
+    t.integer  "registration"
     t.index ["created_at"], name: "index_camps_on_created_at", using: :btree
+    t.index ["registration"], name: "index_camps_on_registration", using: :btree
     t.index ["slug"], name: "index_camps_on_slug", using: :btree
     t.index ["updated_at"], name: "index_camps_on_updated_at", using: :btree
   end

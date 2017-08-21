@@ -21,7 +21,7 @@ class Ability
 
   def participants_rules
     can :sign_up, Camp do |camp|
-      camp.not_started? && user.participations.where(camp_id: camp.id).blank?
+      camp.registration_openned? && user.participations.where(camp_id: camp.id).blank?
     end
 
     can [:edit, :update, :show], Participant do |participant|

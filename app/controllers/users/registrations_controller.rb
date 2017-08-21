@@ -5,7 +5,7 @@ module Users
     protected
 
     def update_resource(resource, params)
-      if resource.password_required?
+      if resource.identities.blank?
         super
       else
         resource.update_without_password(params)

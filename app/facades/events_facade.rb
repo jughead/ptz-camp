@@ -9,12 +9,11 @@ class EventsFacade
   end
 
   def participations
-    @participations ||= participant.event_participations.joins(:event).
-      order(Event.arel_table[:start_at]).decorate
+    @participations ||= participant.event_participations.decorate
   end
 
   def events
-    @events ||= @camp.events
+    @events ||= @camp.events.order(:position, :start_at)
   end
 
   def each_event_with_participation

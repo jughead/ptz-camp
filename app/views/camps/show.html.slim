@@ -8,4 +8,6 @@ br
   div
     = link_to 'Register to the camp', [:new, @camp, :participant], class: 'btn btn-primary'
 
+- if @events_facade
+  h2 Events
 = render 'events/list', facade: @events_facade

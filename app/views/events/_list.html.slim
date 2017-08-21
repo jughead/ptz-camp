@@ -1,5 +1,4 @@
 - if facade.events.present?
-  h2 Events
   .event-list
     - facade.each_event_with_participation do |event, participation|
       h3 = event.name

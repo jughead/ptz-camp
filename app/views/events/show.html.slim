@@ -2,5 +2,6 @@ h1 = @event.name
 p == @event.description
 
 - @participants.each_with_index do |participant, ind|
-  | #{ind + 1}.&nbsp;
-  = participant.name_with_delegation
+  div
+    | #{ind + 1}.&nbsp;
+    = participant.name_with_delegation

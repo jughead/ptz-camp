@@ -1,5 +1,5 @@
 class EventsFacade
-  def initialize(camp, user)
+  def initialize(user, camp)
     @user = user
     @camp = camp
   end

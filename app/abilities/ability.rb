@@ -41,6 +41,8 @@ class Ability
   end
 
   def events_rules
+    can :index, Event
+
     if user.persisted?
       can :opt_in, Event do |event|
         event.camp.participants.where(user: user).any? &&
@@ -64,5 +66,6 @@ class Ability
     end
 
     can :show, Event
+    can :participants, Event
   end
 end

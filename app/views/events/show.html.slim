@@ -1,7 +1,6 @@
-h1 = @event.name
-p == @event.description
+h1 = @facade.event.name
+p == @facade.event.description
 
-- @participants.each_with_index do |participant, ind|
-  div
-    | #{ind + 1}.&nbsp;
-    = participant.name_with_delegation
+= render 'events/status', event: @facade.event, participation: @facade.participation
+br
+= render 'events/participants', facade: @facade

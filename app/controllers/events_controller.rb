@@ -3,39 +3,48 @@ class EventsController < ApplicationController
   load_and_authorize_resource
   decorate_current_camp
 
+  def index
+    @facade = EventsFacade.new(current_user, @camp)
+    render_html_json 'events/list', facade: @facade
+  end
+
   def opt_in
-    find_or_build_participation
+    @facade = EventFacade.new(current_user, @camp, @event)
+    @participation = @facade.participation
     @participation.state = :goes
-    render json: {success: @participation.save, html: render_status}
+    render json: {success: @participation.save}
   end
 
   def opt_out
-    find_or_build_participation
+    @facade = EventFacade.new(current_user, @camp, @event)
+    @participation = @facade.participation
     @participation.state = :skips
-    render json: {success: @participation.save, html: render_status}
+    render json: {success: @participation.save}
   end
 
   def show
-    @participants = @camp.participants.joins(:event_participations).
-      includes(:delegation).
-      merge(EventParticipation.goes.where(event_id: @event.id)).
-      ordered_by_delegation.ordered_by_name.decorate
-    @event = @event.decorate
+    @facade = EventFacade.new(current_user, @camp, @event)
+    respond_to do |format|
+      format.html
+      format.json do
+        render_html_json 'events/status', event: @facade.event,
+          participation: @facade.participation
+      end
+    end
+  end
+
+  def participants
+    @facade = EventFacade.new(current_user, @camp, @event)
+    render_html_json 'events/participants', facade: @facade
   end
 
   private
 
-  def find_or_build_participation
-    @facade = EventsFacade.new(@camp, current_user)
-    @participation = @event.participations.find_or_initialize_by(
-      participant: @facade.participant
-    )
-    @participation = @participation.decorate
+  def render_html_for_json(partial, locals={})
+    render_to_string partial: partial, formats: :html, locals: locals
   end
 
-  def render_status
-    render_to_string partial: 'events/list', locals: {
-      facade: @facade
-    }
+  def render_html_json(partial, locals={})
+    render json: {html: render_html_for_json(partial, locals) }.to_json
   end
 end

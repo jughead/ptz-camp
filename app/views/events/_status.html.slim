@@ -1,4 +1,4 @@
-.event-option-buttons
+.event-option-buttons data={event_id: event.id}
   - can_opt_in  = can?(:opt_in, event)
   - can_opt_out = can?(:opt_out, event)
   - if participation

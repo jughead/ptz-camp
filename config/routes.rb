@@ -32,10 +32,11 @@ Rails.application.routes.draw do
     resource :schedule, controller: :schedule, only: :show
     resources :participants, only: [:new, :index, :create, :edit, :update, :show]
     resources :teams, only: [:index]
-    resources :events, only: [:show] do
+    resources :events, only: [:show, :index] do
       member do
         post :opt_in
         post :opt_out
+        get :participants
       end
     end
     resources :pages, path: '', param: :slug, only: :show

@@ -9,7 +9,7 @@ class ScheduleController < ApplicationController
   private
 
     def load_day_schedules
-      @day_schedules = @camp.day_schedules.map(&:decorate)
+      @day_schedules = @camp.day_schedules
     end
 
 end

@@ -1,5 +1,5 @@
 class Admin::MessagesController < Admin::ApplicationController
-  load_and_authorize_resource through: :current_user
+  load_and_authorize_resource
   load_current_camp
 
   def index

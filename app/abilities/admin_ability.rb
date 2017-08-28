@@ -18,16 +18,6 @@ class AdminAbility
     events_rules
   end
 
-  def can(a, c, *args, &block)
-    case c
-    when Class
-      klass = "Admin::#{c.name}Decorator".safe_constantize
-      can(a, [c, klass].compact, *args, &block)
-    else
-      super
-    end
-  end
-
   def can?(a, c)
     case c
     when Draper::CollectionDecorator, Draper::Decorator
@@ -52,7 +42,7 @@ class AdminAbility
 
   def messages_rules
     return unless user.superadmin?
-    can [:index, :new, :create], Message, user_id: user.id
+    can [:index, :new, :create], Message
   end
 
   def participant_rules

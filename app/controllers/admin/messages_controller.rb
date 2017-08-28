@@ -1,5 +1,5 @@
 class Admin::MessagesController < Admin::ApplicationController
-  load_and_authorize_resource through: :current_user
+  load_and_authorize_resource
   load_current_camp
 
   def index
@@ -11,6 +11,7 @@ class Admin::MessagesController < Admin::ApplicationController
 
   def create
     @message.assign_attributes(create_params)
+    @message.user = current_user
     if @message.save
       CreateMessageNotificationsJob.perform_later(@message)
       redirect_to({action: :index}, notice: 'The message is being processed')

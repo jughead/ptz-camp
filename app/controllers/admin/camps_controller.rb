@@ -9,7 +9,7 @@ class Admin::CampsController < Admin::ApplicationController
   def create
     if @camp.save
       flash[:notice] = 'The camp has been created successfully'
-      redirect_to :index
+      redirect_to action: :index
     else
       render action: :new
     end

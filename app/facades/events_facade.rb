@@ -13,7 +13,11 @@ class EventsFacade
   end
 
   def events
-    @events ||= @camp.events.order(:position, :start_at)
+    @events ||= @camp.events.order(:position, :start_at).load
+  end
+
+  def has_events?
+    events.size > 0
   end
 
   def each_event_with_participation

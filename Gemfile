@@ -75,6 +75,8 @@ gem 'cloudinary'
 # For making structs with type validation
 gem 'active_model_attributes'
 gem 'activerecord-session_store'
+# Session store
+gem 'redis-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -97,7 +99,6 @@ end
 group :production do
   # Use Uglifier as compressor for JavaScript assets
   gem 'uglifier', '>= 1.3.0'
-  gem 'redis-rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

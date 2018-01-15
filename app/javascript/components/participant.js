@@ -1,4 +1,6 @@
-let Form = class Form {
+import 'components/utils/input_helpers'
+
+export default class ParticipantForm {
   constructor(element) {
     this.element = element;
     this.update();
@@ -38,14 +40,14 @@ let Form = class Form {
   }
 
   needsVisaElement() {
-    this.element.find('#participant_personal_needs_visa');
+    return this.element.find('#participant_personal_needs_visa');
   }
 
   static handler() {
     return $('form.new_participant,form.edit_participant').each(function() {
       const $this = $(this);
       if (!this.participant_form) {
-        return this.participant_form = new Form($this);
+        return this.participant_form = new ParticipantForm($this);
       }
     });
   }
@@ -54,8 +56,4 @@ let Form = class Form {
     $(document).on('turbolinks:load', this.handler);
     return $(document).ready(this.handler);
   }
-};
-
-module.exports = {
-  form: Form,
 }

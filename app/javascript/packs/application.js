@@ -6,5 +6,23 @@
 //
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
-import 'jquery-ujs'
-// window.ptzcamp.participants.Form.register()
+import 'bootstrap/dist/js/bootstrap'
+require.context('../stylesheets/', true, /^\.\/[^_].*\.(css|scss|sass)$/i)
+require.context('../images/', true, /\.(gif|jpg|png|svg)$/i)
+
+import {} from 'jquery-ujs'
+import Turbolinks from 'turbolinks'
+Turbolinks.start()
+import ParticipantForm from '../components/participant'
+ParticipantForm.register()
+import * as Events from '../components/events'
+
+// import App from '../components/app.vue'
+
+// document.addEventListener('DOMContentLoaded', () => {
+//   document.body.appendChild(document.createElement('app'))
+//   const app = new Vue(App).$mount('app')
+
+//   console.log(app)
+// })
+

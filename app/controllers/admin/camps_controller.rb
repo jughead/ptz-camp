@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 class Admin::CampsController < Admin::ApplicationController
   load_and_authorize_resource :camp
-  decorate_current_camp
 
   def new
+    decorate_current_camp
   end
 
   def create
+    decorate_current_camp
     if @camp.save
       flash[:notice] = 'The camp has been created successfully'
       redirect_to action: :index
@@ -16,16 +17,20 @@ class Admin::CampsController < Admin::ApplicationController
   end
 
   def index
+    decorate_current_camp
     @camps = @camps.order(created_at: :desc)
   end
 
   def edit
+    decorate_current_camp
   end
 
   def show
+    decorate_current_camp
   end
 
   def update
+    decorate_current_camp
     if @camp.update(update_params)
       flash[:notice] = 'The camp has been updated successfully'
       redirect_to action: :edit
@@ -35,11 +40,13 @@ class Admin::CampsController < Admin::ApplicationController
   end
 
   def dashboard
+    decorate_current_camp
     @participants = @camp.participants
   end
 
   def badges
-    @participants = @camp.participants.order(created_at: :desc)
+    @participants = @camp.participants.order(created_at: :desc).decorate
+    decorate_current_camp
     render :badges, layout: 'badges'
   end
 

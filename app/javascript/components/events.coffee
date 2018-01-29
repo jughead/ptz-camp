@@ -32,7 +32,7 @@ replaceHTML = ($element, data) ->
   $element.replaceWith(data.html)
 
 campSlug = () ->
-  document.location.pathname.split('/')[1] || $('meta[name=current_camp]').attr('content')
+  document.location.pathname.split('/')[1] || $('meta[name=camp_slug]').attr('content')
 
 updateEventParticipants = (event) ->
   $event = $(event.target)

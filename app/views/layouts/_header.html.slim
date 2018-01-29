@@ -14,6 +14,7 @@ nav.navbar.navbar-default
           li = link_to 'Teams', camp_teams_path(@camp)
           li = link_to 'Participants', camp_participants_path(@camp)
           li = link_to 'My participants', my_camp_participants_path(@camp) if can?(:index_my, Participant)
+          li = link_to 'My teams', my_camp_teams_path(@camp) if camp_ability.can?(:index_my, Team)
         = render 'layouts/page_menu'
       ul.nav.navbar-nav.navbar-right
         - if user_signed_in?

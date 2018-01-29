@@ -37,7 +37,11 @@ Rails.application.routes.draw do
         get :my
       end
     end
-    resources :teams, only: [:index]
+    resources :teams, only: [:index] do
+      collection do
+        get :my
+      end
+    end
     resources :events, only: [:show, :index] do
       member do
         post :opt_in
@@ -46,6 +50,18 @@ Rails.application.routes.draw do
       end
     end
     resources :pages, path: '', param: :slug, only: :show
+  end
+
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :camps, only: [] do
+        resources :teams, only: [:index] do
+          collection do
+            get :my
+          end
+        end
+      end
+    end
   end
 
   resources :camps, path: '', param: :slug, only: :show, constraints: CampConstraint.new

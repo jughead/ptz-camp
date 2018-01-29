@@ -3,7 +3,8 @@ html
   head
     title PtzCamp
     = csrf_meta_tags
-    meta name="current_camp" content="#{@camp&.slug}"
+    meta name="camp_slug" content="#{@camp&.slug}"
+    meta name="camp_id" content="#{@camp&.id}"
     = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body

@@ -78,6 +78,8 @@ gem 'active_model_attributes'
 gem 'activerecord-session_store'
 # Session store
 gem 'redis-rails'
+# Serialization
+gem 'active_model_serializers'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

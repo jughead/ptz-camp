@@ -16,13 +16,3 @@ Turbolinks.start()
 import ParticipantForm from '../components/participant'
 ParticipantForm.register()
 import * as Events from '../components/events'
-
-// import App from '../components/app.vue'
-
-// document.addEventListener('DOMContentLoaded', () => {
-//   document.body.appendChild(document.createElement('app'))
-//   const app = new Vue(App).$mount('app')
-
-//   console.log(app)
-// })
-

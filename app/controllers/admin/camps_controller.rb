@@ -39,7 +39,7 @@ class Admin::CampsController < Admin::ApplicationController
   end
 
   def badges
-    @participants = @camp.participants
+    @participants = @camp.participants.order(created_at: :desc)
     render :badges, layout: 'badges'
   end
 

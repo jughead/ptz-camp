@@ -7,4 +7,5 @@ class Event < ApplicationRecord
 
   validates :name, presence: true
   validates :description, presence: true
+  validates :count_limit, presence: true, numericality: { greater_than: 0 }
 end

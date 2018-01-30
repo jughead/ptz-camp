@@ -3,5 +3,6 @@
   = f.input :description
   = f.input :start_at
   = f.input :position
+  = f.input :count_limit
   = f.association :restricted_events, as: :check_boxes, collection: @events
   = f.button :submit, class: 'btn btn-primary'

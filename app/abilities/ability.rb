@@ -46,6 +46,7 @@ class Ability
     if user.persisted?
       can :opt_in, Event do |event|
         event.camp.participants.where(user: user).any? &&
+        event.participations.goes.count < event.count_limit &&
         EventParticipation.joins(:event).
           merge(Event.where(camp_id: event.camp_id)).
           goes.joins(:participant).merge(

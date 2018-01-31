@@ -19,15 +19,19 @@ class PersonalData < ApplicationStruct
     :occupation,
     :points_to_visit,
     :needs_visa,
+    :birth_date,
     ].freeze
   end
 
-  attr_accessor *(self.attributes - [:passport_issue_date, :passport_expire_date, :needs_visa])
+  attr_accessor *(self.attributes - [:passport_issue_date, :passport_expire_date, :needs_visa, :birth_date])
   attribute :passport_issue_date, :date
   attribute :passport_expire_date, :date
+  attribute :birth_date, :date
   attribute :needs_visa, :boolean
 
   validates :first_name, :last_name, presence: true
+  validates :birth_date, presence: true, on: :user
+
   validates :passport_number,
     :passport_issue_date,
     :passport_expire_date,

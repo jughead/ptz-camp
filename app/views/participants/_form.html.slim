@@ -19,14 +19,15 @@
     = ff.input :first_name, required: true
     = ff.input :last_name, required: true
     = ff.input :middle_names
+    = ff.input :birth_date, as: :date, start_year: Date.current.year - 100, end_year: Date.current.year, required: true, default: nil, include_blank: true
     .for_visa
       = ff.input :latin_name
       = ff.input :country_permanent, as: :string
       = ff.input :region_permanent
       = ff.input :address_permanent, as: :text
       = ff.input :passport_number
-      = ff.input :passport_issue_date, as: :date, start_year: Date.current.year - 90, end_year: Date.current.year + 30, order: [:day, :month, :year]
-      = ff.input :passport_expire_date, as: :date, start_year: Date.current.year - 90, end_year: Date.current.year + 30, order: [:day, :month, :year]
+      = ff.input :passport_issue_date, as: :date, start_year: Date.current.year - 90, end_year: Date.current.year + 30, order: [:day, :month, :year], default: nil, include_blank: true
+      = ff.input :passport_expire_date, as: :date, start_year: Date.current.year - 90, end_year: Date.current.year + 30, order: [:day, :month, :year], default: nil, include_blank: true
       = ff.input :visa_city
       = ff.input :place_of_work
       = ff.input :work_address, as: :text

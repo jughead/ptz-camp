@@ -29,10 +29,15 @@ class Notifications::NotifyCommand
     new_recipient.title = @notification.recipient.title
     new_recipient.save!
     if @notification.recipient.id != new_recipient.id
-      @notification.recipient.destroy
+      @notification.recipient.destroy!
       @notification.recipient = new_recipient
-      @notification.save!
-      true
+      begin
+        @notification.save!
+        true
+      rescue PG::UniqueViolation
+        # the notification with this recipient already exist
+        false
+      end
     end
   end
 end

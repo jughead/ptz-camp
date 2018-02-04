@@ -34,7 +34,7 @@ class Notifications::NotifyCommand
       begin
         @notification.save!
         true
-      rescue PG::UniqueViolation
+      rescue ActiveRecord::RecordNotUnique
         # the notification with this recipient already exist
         false
       end

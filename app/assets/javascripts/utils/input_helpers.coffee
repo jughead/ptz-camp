@@ -8,7 +8,7 @@ window.ptzcamp.form_helpers ||=
       $this = $(this)
       label = $this.find('label.control-label')
       if label.find('abbr').length == 0
-        $this.find(':input').addClass('required').attr('required', 'required')
+        $this.find(':input:not([type=hidden])').addClass('required').attr('required', 'required')
         label.addClass('required')
         $this.addClass('required')
         label.html(

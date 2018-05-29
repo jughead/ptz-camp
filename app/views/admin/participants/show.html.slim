@@ -9,12 +9,12 @@ h2
 dl
   dt Email
   dd = @participant.user.email
-  dt Arrival/Departure dates
-  dd = "#{@participant.arrival} - #{@participant.departure}"
   hr
-  - %i(first_name last_name middle_names birth_date latin_name passport_number passport_issue_date       passport_expire_date country_permanent region_permanent address_permanent visa_city       place_of_work work_address occupation points_to_visit).each do |key|
+  - %i(first_name last_name middle_names latin_name birth_date sex citizenship birth_country birth_place country_permanent region_permanent visa_city place_of_work work_address address_permanent passport_number passport_issue_date passport_expire_date passport_issuer points_to_visit).each do |key|
     dt = key.to_s.humanize
     dd = @participant.personal.public_send(key)
+  dt Arrival/Departure dates
+  dd = "#{@participant.arrival} - #{@participant.departure}"
   dt Passport scan
   dd
     - if @participant.passport_scan.url.present?

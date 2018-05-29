@@ -20,6 +20,11 @@ class PersonalData < ApplicationStruct
     :points_to_visit,
     :needs_visa,
     :birth_date,
+    :sex,
+    :citizenship,
+    :birth_country,
+    :birth_place,
+    :passport_issuer,
     ].freeze
   end
 
@@ -42,8 +47,13 @@ class PersonalData < ApplicationStruct
     :visa_city,
     :place_of_work,
     :work_address,
-    :occupation,
-    :points_to_visit, presence: true, if: :needs_visa
+    :points_to_visit,
+    :citizenship,
+    :birth_country,
+    :birth_place,
+    :passport_issuer,
+    presence: true, if: :needs_visa
+  validates :sex, inclusion: {in: ['male', 'female']}, if: :needs_visa
 
   def attributes
     self.class.attributes.map{|key| [key, public_send(key)]}.to_h

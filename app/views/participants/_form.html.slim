@@ -15,33 +15,37 @@
   = f.input :arrival, as: :date, order: [:day, :month, :year], default: @camp.start_date
   = f.input :departure, as: :date, order: [:day, :month, :year], default: @camp.finish_date
   = f.fields_for :personal, f.object.personal do |ff|
-    = ff.input :needs_visa, as: :boolean
     = ff.input :first_name, required: true
     = ff.input :last_name, required: true
-    = ff.input :middle_names
     = ff.input :birth_date, as: :date, start_year: Date.current.year - 100, end_year: Date.current.year, required: true, default: nil, include_blank: true
+    = f.input :tshirt, as: :select, collection: Participant.tshirts.map(&:first)
+    = f.input :delegation_id, as: :select, collection: participant.camp.delegations.order(name: :asc)
+    = ff.input :needs_visa, as: :boolean, label: 'I need visa to get to Petrozavodsk'
     .for_visa
-      = ff.input :latin_name
-      = ff.input :country_permanent, as: :string
-      = ff.input :region_permanent
-      = ff.input :address_permanent, as: :text
-      = ff.input :passport_number
-      = ff.input :passport_issue_date, as: :date, start_year: Date.current.year - 90, end_year: Date.current.year + 30, order: [:day, :month, :year], default: nil, include_blank: true
-      = ff.input :passport_expire_date, as: :date, start_year: Date.current.year - 90, end_year: Date.current.year + 30, order: [:day, :month, :year], default: nil, include_blank: true
-      = ff.input :visa_city
-      = ff.input :place_of_work
-      = ff.input :work_address, as: :text
-      = ff.input :occupation
-      = ff.input :points_to_visit
-  = f.input :tshirt, as: :select, collection: Participant.tshirts.map(&:first)
-  = f.input :delegation_id, as: :select, collection: participant.camp.delegations.order(name: :asc)
-  .for_visa
-    = f.input :passport_scan, required: false
-    - if @participant.passport_scan.url.present?
-      .form-group.green
-        p.text-success
-          | You have uploaded passport scan.
-
+      .panel.panel-default
+        .panel-heading Visa invitation data
+        .panel-body
+          = ff.input :latin_name, label: 'Full passport name', hint: 'Last name, First name, Middle names as in your Passport'
+          = ff.input :sex, as: :radio_buttons, collection: [['Male', 'male'], ['Female', 'female']]
+          = ff.input :citizenship, as: :string
+          = ff.input :birth_country, as: :string, hint: 'Country where you were born'
+          = ff.input :birth_place, as: :string, hint: 'City/region where you were born'
+          = ff.input :country_permanent, as: :string, label: 'Country of permanent residence'
+          = ff.input :region_permanent, as: :string, label: 'City/region of permanent residence'
+          = ff.input :address_permanent, as: :text, label: 'Address of permanent residence'
+          = ff.input :visa_city, label: 'Where you are going to get visa? (country, city)'
+          = ff.input :place_of_work, label: 'University name or place of work'
+          = ff.input :work_address, as: :text, label: 'University address or work address'
+          = ff.input :passport_number
+          = ff.input :passport_issue_date, as: :date, start_year: Date.current.year - 90, end_year: Date.current.year + 30, order: [:day, :month, :year], default: nil, include_blank: true
+          = ff.input :passport_expire_date, as: :date, start_year: Date.current.year - 90, end_year: Date.current.year + 30, order: [:day, :month, :year], default: nil, include_blank: true
+          = ff.input :passport_issuer
+          = ff.input :points_to_visit, label: 'Cities you are going to visit in Russian Federation', hint: 'Moscow, Petrozavodsk'
+          = f.input :passport_scan, required: false
+          - if @participant.passport_scan.url.present?
+            .form-group.green
+              p.text-success
+                | You have uploaded passport scan.
   - if participant.requires_registration?
     - unless @recaptcha_ok
       div.form-group.has-error

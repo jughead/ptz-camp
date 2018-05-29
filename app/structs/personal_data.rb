@@ -25,6 +25,7 @@ class PersonalData < ApplicationStruct
     :birth_country,
     :birth_place,
     :passport_issuer,
+    :food_limitations,
     ].freeze
   end
 

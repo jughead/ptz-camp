@@ -75,6 +75,9 @@
         }
       }
     },
+    mounted () {
+      this.loadTeams()
+    },
     computed: {
       canSubmit: function () {
         return this.newTeam.name.length > 0 && this.newTeam.members.length > 0;

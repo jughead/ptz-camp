@@ -55,9 +55,15 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :camps, only: [] do
-        resources :teams, only: [:index] do
+        resources :teams, only: [:index, :create, :destroy] do
           collection do
             get :my
+          end
+        end
+
+        resources :participants, only: [] do
+          collection do
+            get :unused
           end
         end
       end

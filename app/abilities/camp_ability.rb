@@ -5,6 +5,7 @@ class CampAbility
     @user = user
     @camp = camp
     teams_rules
+    participant_rules
   end
 
   def participant
@@ -18,6 +19,14 @@ class CampAbility
   end
 
   def teams_rules
-    can :index_my, Team if participant_is_coach?
+    if participant_is_coach?
+      can :index_my, Team, delegation: participant.delegation
+      can :create, Team, delegation: participant.delegation
+      can :destroy, Team, delegation: participant.delegation
+    end
+  end
+
+  def participant_rules
+    can :index_unused, Participant, delegation: participant.delegation if participant_is_coach?
   end
 end

@@ -1,8 +1,7 @@
 h1 My teams
 
 div#teams
-  teams my=true
-
+  teams[my v-bind:initial-teams=@teams.to_json]
 = javascript_pack_tag 'teams', 'data-turbolinks-track': 'reload'
 = stylesheet_pack_tag 'teams', 'data-turbolinks-track': 'reload', media: 'all'
 

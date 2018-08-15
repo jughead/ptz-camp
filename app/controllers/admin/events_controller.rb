@@ -43,7 +43,7 @@ class Admin::EventsController < Admin::ApplicationController
   private
 
     def params_keys
-      [:name, :description, :start_at, :position, restricted_event_ids: []]
+      [:name, :description, :start_at, :position, :count_limit, restricted_event_ids: []]
     end
 
     def create_params

@@ -11,8 +11,8 @@ require.context('../stylesheets/', true, /^\.\/[^_].*\.(css|scss|sass)$/i)
 require.context('../images/', true, /\.(gif|jpg|png|svg)$/i)
 
 import {} from 'jquery-ujs'
-import Turbolinks from 'turbolinks'
-Turbolinks.start()
+// import Turbolinks from 'turbolinks'
+// Turbolinks.start()
 import ParticipantForm from '../components/participant'
 ParticipantForm.register()
 import * as Events from '../components/events'

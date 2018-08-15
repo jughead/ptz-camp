@@ -19,15 +19,25 @@ class PersonalData < ApplicationStruct
     :occupation,
     :points_to_visit,
     :needs_visa,
+    :birth_date,
+    :sex,
+    :citizenship,
+    :birth_country,
+    :birth_place,
+    :passport_issuer,
+    :food_limitations,
     ].freeze
   end
 
-  attr_accessor *(self.attributes - [:passport_issue_date, :passport_expire_date, :needs_visa])
+  attr_accessor *(self.attributes - [:passport_issue_date, :passport_expire_date, :needs_visa, :birth_date])
   attribute :passport_issue_date, :date
   attribute :passport_expire_date, :date
+  attribute :birth_date, :date
   attribute :needs_visa, :boolean
 
   validates :first_name, :last_name, presence: true
+  validates :birth_date, presence: true, on: :user
+
   validates :passport_number,
     :passport_issue_date,
     :passport_expire_date,
@@ -38,8 +48,13 @@ class PersonalData < ApplicationStruct
     :visa_city,
     :place_of_work,
     :work_address,
-    :occupation,
-    :points_to_visit, presence: true, if: :needs_visa
+    :points_to_visit,
+    :citizenship,
+    :birth_country,
+    :birth_place,
+    :passport_issuer,
+    presence: true, if: :needs_visa
+  validates :sex, inclusion: {in: ['male', 'female']}, if: :needs_visa
 
   def attributes
     self.class.attributes.map{|key| [key, public_send(key)]}.to_h

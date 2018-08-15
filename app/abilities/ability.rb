@@ -42,6 +42,9 @@ class Ability
 
   def teams_rules
     can :index, Team
+    if user.has_role?(:supervisor)
+      can :my, Team, delegation: { supervisor_id: user.id }
+    end
   end
 
   def events_rules
@@ -50,6 +53,7 @@ class Ability
     if user.persisted?
       can :opt_in, Event do |event|
         event.camp.participants.where(user: user).any? &&
+        event.participations.goes.count < event.count_limit &&
         EventParticipation.joins(:event).
           merge(Event.where(camp_id: event.camp_id)).
           goes.joins(:participant).merge(

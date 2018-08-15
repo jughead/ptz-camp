@@ -40,7 +40,7 @@
     <ul>
       <li v-for="team in teams" class="teams">
         {{ team.full_name }}
-        <span class="badge" v-if="team.with_laptop">with laptop</span>
+        <span class="badge" v-if="showTeamLaptopBadge(team)">with laptop</span>
         <a href="#" @click="destroyTeam(team)" v-if="my">&times;</a>
       </li>
     </ul>
@@ -87,8 +87,8 @@
       },
     },
     methods: {
-      participantsEndpoint () {
-        return '/api/v1/camps/' + CurrentCamp.id + '/participants/unused'
+      participantsEndpoint (query) {
+        return '/api/v1/camps/' + CurrentCamp.id + '/participants/unused?q=' + query
       },
       participantDisplay (result) {
         return result.name;
@@ -134,6 +134,10 @@
             console.log(error);
           }
         })
+      },
+      showTeamLaptopBadge (team) {
+        const authorization = this.my == true;
+        return authorization && team.with_laptop;
       },
       create () {
         const app = this;

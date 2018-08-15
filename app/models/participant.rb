@@ -22,6 +22,8 @@ class Participant < ApplicationRecord
   scope :without_team, ->(team=nil) { Participants::WithoutTeamQuery.new(team).query }
   scope :ordered_by_delegation, -> { order(:delegation_id) }
   scope :ordered_by_name, -> { order("personal->>'first_name', personal->>'last_name'")}
+  scope :match_first_name, -> (collection) { where("(personal->>'first_name') IN (?)", collection) }
+  scope :match_last_name, -> (collection) { where("(personal->>'last_name') IN (?)", collection) }
 
   def user
     super || GuestUser.instance

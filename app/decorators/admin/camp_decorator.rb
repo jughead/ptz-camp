@@ -21,7 +21,7 @@ module Admin
     end
 
     def date_range
-      "#{I18n.l start_date, format: '%B, %d'} &mdash; #{I18n.l finish_date, format: '%B, %d'}".html_safe
+      "#{I18n.l start_date, format: '%d.%m'} &mdash; #{I18n.l finish_date, format: '%d.%m.%Y'}".html_safe
     end
 
     def participants_without_teams(team)

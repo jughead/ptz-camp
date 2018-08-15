@@ -21,6 +21,10 @@ class GuestUser < User
     true
   end
 
+  def has_role?(*)
+    false
+  end
+
   class Participations
     include Singleton
 

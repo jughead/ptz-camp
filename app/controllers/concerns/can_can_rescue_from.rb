@@ -9,7 +9,15 @@ module CanCanRescueFrom
 
     def not_authorized(exception)
       Rails.logger.info "CanCan::AccessDenied. Subject Class: #{exception.subject.class}, Action: #{exception.action}, Subject: #{exception.subject}"
-      redirect_to root_path, alert: not_authorized_message(exception)
+      respond_to do |format|
+        format.html do
+          redirect_to root_path, alert: not_authorized_message(exception)
+        end
+
+        format.json do
+          render json: { error: not_authorized_message(exception) }, status: 403
+        end
+      end
     end
 
     def not_authorized_message(exception)

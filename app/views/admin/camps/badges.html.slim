@@ -2,7 +2,7 @@
   .camp-badge
     .camp-badge_header
       div
-        = image_tag 'petrsu.svg'
+        = image_tag asset_pack_path('images/petrsu.svg')
       .camp-badge_header-title Petrozavodsk State University
     .camp-badge_body
       .camp-badge_body-role
@@ -16,7 +16,7 @@
       .camp-badge_body-camp
         = @camp.badge_info
     .camp-badge_footer
-      = image_tag 'icpc_logo.png', class: 'icpc'
+      = image_tag asset_pack_path('images/icpc_logo.png'), class: 'icpc'
       /.sponsors
         = image_tag 'yandex.png', class: 'camp-badge_footer-sponsor yandex'
         = image_tag 'aim_tech.png', class: 'camp-badge_footer-sponsor aim_tech'

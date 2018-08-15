@@ -1,11 +1,7 @@
 h1 Teams
 
-table
-  tbody
-    - @teams.each_with_index do |team, ind|
-      tr
-        td
-          = ind + 1
-          | .&nbsp;
-          = team.full_name
+div#teams
+  teams
 
+= javascript_pack_tag 'teams', 'data-turbolinks-track': 'reload'
+= stylesheet_pack_tag 'teams', 'data-turbolinks-track': 'reload', media: 'all'

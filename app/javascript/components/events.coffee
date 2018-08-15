@@ -1,4 +1,5 @@
 decide = (event, data, status) ->
+  console.log(event, data, status)
   $target = $(event.target)
   if data.success
     $target.closest('.event-option-buttons').trigger('ptzcamp:event:update')
@@ -31,7 +32,7 @@ replaceHTML = ($element, data) ->
   $element.replaceWith(data.html)
 
 campSlug = () ->
-  document.location.pathname.split('/')[1]
+  document.location.pathname.split('/')[1] || $('meta[name=camp_slug]').attr('content')
 
 updateEventParticipants = (event) ->
   $event = $(event.target)
@@ -39,6 +40,7 @@ updateEventParticipants = (event) ->
     success: (data) ->
       replaceHTML($('.event-participants'), data)
   )
+
 
 $(document).on('ajax:success', decide)
 $(document).on('ptzcamp:event:update', reloadEvent)

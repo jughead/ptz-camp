@@ -15,6 +15,10 @@ class ApplicationController < ActionController::Base
     @current_ability ||= Ability.new(current_user)
   end
 
+  def camp_ability
+    @camp_ability ||= CampAbility.new(current_user, @camp)
+  end
+
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
@@ -27,6 +31,6 @@ class ApplicationController < ActionController::Base
     current_user.present?
   end
 
-  helper_method :devise_mapping
+  helper_method :devise_mapping, :camp_ability
 
 end

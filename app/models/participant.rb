@@ -32,7 +32,7 @@ class Participant < ApplicationRecord
   end
 
   def self.roles
-    @roles ||= [:participant, :coach, :guest].freeze
+    @roles ||= [:participant, :coach, :guest, :organizer].freeze
   end
 
 end

@@ -7,4 +7,8 @@ class Team < ApplicationRecord
   validates :camp, presence: true
 
   scope :ordered_by_name, -> { order(:name) }
+
+  before_destroy do
+    participants.update_all(team_id: nil)
+  end
 end

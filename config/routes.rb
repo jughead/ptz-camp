@@ -32,8 +32,16 @@ Rails.application.routes.draw do
 
   resources :camps, path: '', param: :slug, only: [] do
     resource :schedule, controller: :schedule, only: :show
-    resources :participants, only: [:new, :index, :create, :edit, :update, :show]
-    resources :teams, only: [:index]
+    resources :participants, only: [:new, :index, :create, :edit, :update, :show] do
+      collection do
+        get :my
+      end
+    end
+    resources :teams, only: [:index] do
+      collection do
+        get :my
+      end
+    end
     resources :events, only: [:show, :index] do
       member do
         post :opt_in
@@ -42,6 +50,24 @@ Rails.application.routes.draw do
       end
     end
     resources :pages, path: '', param: :slug, only: :show
+  end
+
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :camps, only: [] do
+        resources :teams, only: [:index, :create, :destroy] do
+          collection do
+            get :my
+          end
+        end
+
+        resources :participants, only: [] do
+          collection do
+            get :unused
+          end
+        end
+      end
+    end
   end
 
   resources :camps, path: '', param: :slug, only: :show, constraints: CampConstraint.new

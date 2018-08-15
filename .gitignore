@@ -41,5 +41,8 @@ bower.json
 
 .DS_Store
 .rake_tasks~
+/node_modules
+/public/packs
+/public/packs-test
 *.sublime-project
 *.sublime-workspace

@@ -3,6 +3,7 @@ html
   head
     title Badges - #{@camp.title}
     = csrf_meta_tags
-    = stylesheet_link_tag 'badges', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'badges', 'data-turbolinks-track': 'reload'
+    = stylesheet_pack_tag 'badges', media: 'all', 'data-turbolinks-track': 'reload'
   body
     = yield

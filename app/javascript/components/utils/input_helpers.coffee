@@ -28,12 +28,3 @@ window.ptzcamp.form_helpers ||=
         $this.removeClass('required')
         abbr.remove()
         label.text(label.text()[1..-1])
-
-# window.ptzcamp.Form ||= class Form
-#   @register: () ->
-#     $(document).on 'submit', 'form', () ->
-#       form = $(this)
-#       form.find(':input').each () ->
-#         input = $(this)
-#         if input.is('radio')
-# #       form.

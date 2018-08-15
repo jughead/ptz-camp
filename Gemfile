@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '~> 5.0.4'
+gem 'rails', '~> 5.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
@@ -16,18 +16,19 @@ gem 'puma', '~> 3.0'
 # Asset extensions
 #######################
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0.4'
+# gem 'sass-rails', '~> 5.0.6'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.2'
+# gem 'coffee-rails', '~> 4.2'
 # Adding bootstrap as we are lazy and non-frontend guys
-gem 'bootstrap-sass', '~> 3.3.6'
+# gem 'bootstrap-sass', '~> 3.3.6'
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+# gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
+# gem 'turbolinks', '~> 5'
 # Font Awesome
-gem 'font-awesome-rails'
-gem 'non-stupid-digest-assets'
+# gem 'font-awesome-rails'
+# gem 'non-stupid-digest-assets'
+gem 'webpacker'
 
 ########################
 # Template extensions
@@ -77,6 +78,8 @@ gem 'active_model_attributes'
 gem 'activerecord-session_store'
 # Session store
 gem 'redis-rails'
+# Serialization
+gem 'active_model_serializers'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -98,7 +101,7 @@ end
 
 group :production do
   # Use Uglifier as compressor for JavaScript assets
-  gem 'uglifier', '>= 1.3.0'
+  # gem 'uglifier', '>= 1.3.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

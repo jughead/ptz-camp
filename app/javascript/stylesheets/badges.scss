@@ -16,6 +16,9 @@ html, body {
 }
 
 @media print {
+  body {
+    -webkit-print-color-adjust: exact;
+  }
   .camp-badge {
     page-break-after: always;
     page-break-inside: avoid;
@@ -102,26 +105,26 @@ html, body {
 
 .camp-badge_header {
   padding-top: 2%;
+  padding-bottom: 2%;
   height: 20%;
   min-height: 20%;
   display: table;
   width: 100%;
-  background-color: red;
-  -webkit-print-color-adjust: exact;
+  background-color: #FF0000 !important;
 
   div {
-    font-size: 13pt;
-    font-family: PT Sans;
-    text-transform: uppercase;
-    color: white;
     display: table-cell;
     vertical-align: middle;
   }
   img {
-    padding-top: 1%;
+    padding-top: 0;
     padding-left: 12%;
   }
   .camp-badge_header-title {
-    padding-left: 20px;
+    padding-left: 10px;
+    font-size: 13pt;
+    font-family: PT Sans !important;
+    text-transform: uppercase;
+    color: white !important;
   }
 }

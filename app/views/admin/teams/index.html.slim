@@ -11,6 +11,7 @@ table.table
       th Name
       th Laptop?
       th Delegation
+      th T-shirts
       th Actions
   tbody
     - @teams.each do |team|
@@ -19,6 +20,7 @@ table.table
         td = team.full_name
         td = team.with_laptop ? 'Yes' : 'No'
         td = team.delegation&.name
+        td = team.tshirts
         td
           = link_to 'Edit', edit_admin_camp_team_path(@camp, team), class: 'btn btn-xs btn-success' if can?(:edit, team)
           = link_to 'Destroy', admin_camp_team_path(@camp, team), data: {method: :delete, confirm: 'Are you sure you want to remove the team?'}, class: 'btn btn-xs btn-danger' if can?(:destroy, team)

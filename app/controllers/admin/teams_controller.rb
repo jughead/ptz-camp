@@ -7,7 +7,7 @@ class Admin::TeamsController < Admin::ApplicationController
 
   def index
     @teams = @teams.includes(:participants, :delegation)
-    @teams = @teams.decorate
+    @teams = Admin::TeamDecorator.decorate_collection(@teams.decorate)
   end
 
   def new

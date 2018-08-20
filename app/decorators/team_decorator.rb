@@ -1,6 +1,8 @@
 class TeamDecorator < ApplicationDecorator
+  decorates_association :participants, with: ::ParticipantDecorator
+
   def full_name
-    "#{object.name}: #{participants.decorate.sort_by(&:last_name).map(&:last_name).join(', ')}"
+    "#{object.name}: #{participants.sort_by(&:last_name).map(&:last_name).join(', ')}"
   end
 
   def as_json(*args)

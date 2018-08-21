@@ -16,6 +16,7 @@ table.table
         th Delegation
       th T-Shirt
       th Role
+      th Birthday
       th Registered At
       th Actions
   tbody
@@ -28,6 +29,7 @@ table.table
           td = participant.delegation.name
         td = participant.tshirt
         td = participant.role
+        td = participant.personal.birth_date ? l(participant.personal.birth_date, format: "%d.%m.%Y") : ''
         td = l participant.created_at, format: "%c"
         td
           = link_to 'Edit', edit_admin_camp_participant_path(@camp, participant), class: 'btn btn-xs btn-success' if can?(:edit, participant)

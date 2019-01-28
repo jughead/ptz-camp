@@ -7,6 +7,19 @@ ul
   - @camp.day_schedules.each do |day|
     li = link_to day.date, day.edit_path
 
+h2 Food limitations
+
+table.table
+  thead
+    tr
+      th Name
+      th Limitation
+  tbody
+    - @food_limitations.each do |part|
+      tr
+        td = link_to part.name, admin_camp_participant_path(@camp, part)
+        td = part.personal.food_limitations
+
 h2 T-Shirts
 
 table.table

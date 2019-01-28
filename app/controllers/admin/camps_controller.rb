@@ -27,6 +27,7 @@ class Admin::CampsController < Admin::ApplicationController
 
   def show
     decorate_current_camp
+    @food_limitations = Camps::FoodLimitations.new(@camp.object).participants(Admin::ParticipantDecorator)
   end
 
   def update

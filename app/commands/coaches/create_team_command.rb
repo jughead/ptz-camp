@@ -28,7 +28,7 @@ module Coaches
     delegate :participant, to: :@ability
 
     def permited_params
-      @params.permit(:name, :with_laptop, participant_ids: [])
+      @params.permit(:name, :with_laptop, :with_display, :keyboard, :mouse, participant_ids: [])
     end
   end
 end

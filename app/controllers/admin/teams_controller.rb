@@ -43,7 +43,7 @@ class Admin::TeamsController < Admin::ApplicationController
   private
 
     def params_keys
-      [:name, :with_laptop, :delegation_id, participant_ids: []]
+      [:name, :with_laptop, :with_display, :keyboard, :mouse, :delegation_id, participant_ids: []]
     end
 
     def create_params

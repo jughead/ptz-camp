@@ -6,7 +6,14 @@ class TeamDecorator < ApplicationDecorator
   end
 
   def as_json(*args)
-    {id: id, full_name: full_name, with_laptop: with_laptop}.as_json(*args)
+    {
+      id: id,
+      full_name: full_name,
+      with_laptop: with_laptop,
+      with_display: with_display,
+      keyboard: keyboard,
+      mouse: mouse,
+    }.as_json(*args)
   end
 
   def to_json(*args)

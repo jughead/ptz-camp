@@ -2,16 +2,27 @@
   <div>
     <div v-if="my">
       <div class="row">
-        <div class="form-group col-xs-4">
+        <div class="form-group col-xs-5">
           <label for="newTeamName">Enter new team name</label>
           <input autocomplete="off" v-model="newTeam.name" class="form-control" id="newTeamName"/>
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-xs-4" v-if="canEnterNewUser">
+        <div class="form-group col-xs-5" v-if="canEnterNewUser">
           <label class="form-control">
-            <input v-model="newTeam.withLaptop" type="checkbox"/> With laptop?
+            <input v-model="newTeam.withLaptop" type="checkbox"/> We'll bring a laptop instead of using host's computer.
           </label>
+          <div v-if="newTeam.withLaptop === true">
+            <label class="form-control">
+              <input v-model="newTeam.withDisplay" type="checkbox"/> We need a display.
+            </label>
+            <label class="form-control">
+              <input v-model="newTeam.keyboard" type="checkbox"/> We need a keyboard.
+            </label>
+            <label class="form-control">
+              <input v-model="newTeam.mouse" type="checkbox"/> We need a mouse.
+            </label>
+          </div>
           <autocomplete ref="autocomplete" input-attrs="autocomplete=off" placeholder="Enter team member name" input-class="form-control" :source="participantsEndpoint" resultsProperty="data" :results-display="participantDisplay" @selected="addParticipant"/>
         </div>
       </div>
@@ -40,7 +51,10 @@
     <ul>
       <li v-for="team in teams" class="teams">
         {{ team.full_name }}
-        <span class="badge" v-if="showTeamLaptopBadge(team)">with laptop</span>
+        <span class="badge" v-if="showTeamLaptopBadge(team, 'with_laptop')">laptop</span>
+        <span class="badge" v-if="showTeamLaptopBadge(team, 'with_display')">display</span>
+        <span class="badge" v-if="showTeamLaptopBadge(team, 'keyboard')">keyboard</span>
+        <span class="badge" v-if="showTeamLaptopBadge(team, 'mouse')">mouse</span>
         <a href="#" @click="destroyTeam(team)" v-if="my">&times;</a>
       </li>
     </ul>
@@ -70,6 +84,9 @@
         newTeam: {
           name: '',
           withLaptop: false,
+          withDisplay: false,
+          mouse: false,
+          keyboard: false,
           members: [],
           errors: [],
         }
@@ -120,6 +137,9 @@
         this.newTeam.name = ''
         this.newTeam.errors = {}
         this.newTeam.withLaptop = false
+        this.newTeam.withDisplay = false
+        this.newTeam.keyboard = false
+        this.newTeam.mouse = false
       },
       destroyTeam (team) {
         const app = this;
@@ -135,9 +155,9 @@
           }
         })
       },
-      showTeamLaptopBadge (team) {
+      showTeamLaptopBadge (team, key) {
         const authorization = this.my == true;
-        return authorization && team.with_laptop;
+        return authorization && team[key];
       },
       create () {
         const app = this;
@@ -148,6 +168,9 @@
           data: {
             name: this.newTeam.name,
             with_laptop: this.newTeam.withLaptop,
+            with_display: this.newTeam.withDisplay,
+            keyboard: this.newTeam.keyboard,
+            mouse: this.newTeam.mouse,
             participant_ids: this.newTeam.members.map((i => i.id))
           },
           success: function(data) {

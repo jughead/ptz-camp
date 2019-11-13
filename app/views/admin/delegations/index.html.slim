@@ -1,6 +1,8 @@
 = link_to 'Back to camp', [:admin, @camp]
 br
 = link_to 'New delegation', new_admin_camp_delegation_path(@camp), class: 'btn btn-primary'
+| &nbsp;
+= link_to 'Copy delegations from last camp', copy_from_last_admin_camp_delegations_path(@camp), class: 'btn btn-danger', data: { method: 'POST', confirm: 'Are you sure you want to copy delegations from the last camp?' } if can?(:copy_from_last, @camp)
 hr
 
 table.table

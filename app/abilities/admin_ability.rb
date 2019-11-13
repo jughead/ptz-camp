@@ -33,6 +33,8 @@ class AdminAbility
 
   def delegation_rules
     can [:index, :new, :create, :edit, :update, :show], Delegation
+    can [:copy_from_last], Camp
+    can [:copy_from_last], Delegation
     can :destroy, Delegation if user.superadmin?
   end
 

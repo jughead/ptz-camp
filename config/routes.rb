@@ -18,7 +18,12 @@ Rails.application.routes.draw do
           get :dashboard
           get :badges
         end
-        resources :delegations
+        resources :delegations do
+          collection do
+            post :copy_from_last
+          end
+        end
+
         resources :day_schedules, only: [:index, :edit, :update]
         resources :participants
         resources :pages, except: [:show]

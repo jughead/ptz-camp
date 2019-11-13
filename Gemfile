@@ -44,9 +44,9 @@ gem 'slim'
 # Authentication, authorization, etc
 ####################################
 gem 'devise'
-gem 'omniauth-facebook'
-gem 'omniauth-vkontakte'
-gem 'omniauth-google-oauth2'
+gem 'omniauth-facebook', github: 'jughead/omniauth-facebook'
+gem 'omniauth-vkontakte', github: 'jughead/omniauth-vkontakte'
+gem 'omniauth-google-oauth2', '~> 0.8.0'
 # Role base authorization
 gem 'rolify'
 gem 'cancancan'

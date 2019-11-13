@@ -39,6 +39,11 @@ class Admin::DelegationsController < Admin::ApplicationController
     @participants = Admin::ParticipantDecorator.decorate_collection(@delegation.participants)
   end
 
+  def copy_from_last
+    Camps::CopyFromLastCommand.new(@camp).execute
+    redirect_to({action: :index}, notice: 'The delegations have been copied')
+  end
+
   private
 
     def create_params

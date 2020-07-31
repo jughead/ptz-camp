@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.3.1'
+ruby '2.6.6'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -10,7 +10,7 @@ gem 'rails', '~> 5.1.6'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
-gem 'puma', '~> 3.0'
+gem 'puma', '~> 4.0'
 
 #######################
 # Asset extensions
@@ -43,7 +43,7 @@ gem 'slim'
 ####################################
 # Authentication, authorization, etc
 ####################################
-gem 'devise'
+gem 'devise', '~> 4.4.0'
 gem 'omniauth-facebook'
 gem 'omniauth-vkontakte'
 gem 'omniauth-google-oauth2', '~> 0.8.0'

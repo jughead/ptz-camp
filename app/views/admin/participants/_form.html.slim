@@ -19,6 +19,11 @@
     = ff.input :work_address, as: :text
     = ff.input :occupation
     = ff.input :points_to_visit
+  
+  = f.fields_for :camp_field_set do |ff|
+    - @camp_field_set.each do |field|
+      = ff.input field.name, field.options
+  
   = f.input :tshirt, as: :select, collection: Participant.tshirts.map(&:first)
   = f.input :delegation_id, as: :select, collection: participant.camp.delegations.order(name: :asc)
   = f.fields_for :personal, f.object.personal do |ff|

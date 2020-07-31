@@ -1,5 +1,5 @@
 class Camp < ApplicationRecord
-  enum registration: [:openned, :closed], _prefix: true
+  enum registration: %i[openned closed], _prefix: true
 
   has_many :day_schedules, dependent: :destroy
   has_many :delegations, dependent: :destroy
@@ -7,6 +7,7 @@ class Camp < ApplicationRecord
   has_many :pages, dependent: :destroy
   has_many :teams, dependent: :destroy
   has_many :events, dependent: :destroy
+  has_one :camp_field_set, dependent: :destroy
 
   after_create :create_day_schedules
 

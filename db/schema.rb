@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190528215218) do
+ActiveRecord::Schema.define(version: 20200731205548) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "camp_field_sets", force: :cascade do |t|
+    t.bigint "camp_id", null: false
+    t.jsonb "fields"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["camp_id"], name: "index_camp_field_sets_on_camp_id"
+  end
 
   create_table "camps", id: :serial, force: :cascade do |t|
     t.string "title", null: false
@@ -238,6 +246,7 @@ ActiveRecord::Schema.define(version: 20190528215218) do
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
   end
 
+  add_foreign_key "camp_field_sets", "camps"
   add_foreign_key "day_schedules", "camps"
   add_foreign_key "delegations", "camps"
   add_foreign_key "event_participations", "events"

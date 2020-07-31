@@ -80,6 +80,9 @@ gem 'activerecord-session_store'
 gem 'redis-rails'
 # Serialization
 gem 'active_model_serializers'
+# Dry-rb
+gem 'dry-transaction'
+gem 'dry-schema'
 
 
 group :development, :test do

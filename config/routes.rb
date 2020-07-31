@@ -7,12 +7,12 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
   }
 
-  authenticate :user, lambda{ |u| u.admin? } do
+  authenticate :user, ->(u) { u.admin? } do
     get :admin, to: 'admin/site#home'
 
     namespace :admin do
       mount Sidekiq::Web => '/sidekiq'
-      resources :messages, only: [:index, :create, :new]
+      resources :messages, only: %i[index create new]
       resources :camps do
         member do
           get :dashboard
@@ -24,7 +24,9 @@ Rails.application.routes.draw do
           end
         end
 
-        resources :day_schedules, only: [:index, :edit, :update]
+        resource :field_sets, only: %i[edit update]
+
+        resources :day_schedules, only: %i[index edit update]
         resources :participants
         resources :pages, except: [:show]
         resources :teams, except: [:show]
@@ -37,7 +39,7 @@ Rails.application.routes.draw do
 
   resources :camps, path: '', param: :slug, only: [] do
     resource :schedule, controller: :schedule, only: :show
-    resources :participants, only: [:new, :index, :create, :edit, :update, :show] do
+    resources :participants, only: %i[new index create edit update show] do
       collection do
         get :my
       end
@@ -47,7 +49,7 @@ Rails.application.routes.draw do
         get :my
       end
     end
-    resources :events, only: [:show, :index] do
+    resources :events, only: %i[show index] do
       member do
         post :opt_in
         post :opt_out
@@ -60,7 +62,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :camps, only: [] do
-        resources :teams, only: [:index, :create, :destroy] do
+        resources :teams, only: %i[index create destroy] do
           collection do
             get :my
           end

@@ -1,0 +1,4 @@
+.col-xs-12
+  = simple_form_for @camp_field_set, url: admin_camp_field_sets_path(@camp), method: :put do |f|
+    = f.input :fields, as: :text, required: true
+    = f.button :submit, class: 'btn btn-primary'

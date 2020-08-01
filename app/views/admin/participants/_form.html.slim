@@ -19,9 +19,9 @@
     = ff.input :work_address, as: :text
     = ff.input :occupation
     = ff.input :points_to_visit
-  = f.input :tshirt, as: :select, collection: Participant.tshirts.map(&:first)
+  /= f.input :tshirt, as: :select, collection: Participant.tshirts.map(&:first)
   = f.input :delegation_id, as: :select, collection: participant.camp.delegations.order(name: :asc)
-  = f.fields_for :personal, f.object.personal do |ff|
+  /= f.fields_for :personal, f.object.personal do |ff|
     = ff.input :food_limitations
   = f.input :passport_scan
   = f.button :submit, class: 'btn btn-primary'

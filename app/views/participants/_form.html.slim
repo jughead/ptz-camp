@@ -12,15 +12,15 @@
     = f.input :password, required: true, hint: participant.password_hint
     = f.input :password_confirmation, required: true
   h3 Camp registration
-  = f.input :arrival, as: :date, order: [:day, :month, :year], default: @camp.start_date
-  = f.input :departure, as: :date, order: [:day, :month, :year], default: @camp.finish_date
+  / = f.input :arrival, as: :date, order: [:day, :month, :year], default: @camp.start_date
+  / = f.input :departure, as: :date, order: [:day, :month, :year], default: @camp.finish_date
   = f.fields_for :personal, f.object.personal do |ff|
     = ff.input :first_name, required: true
     = ff.input :last_name, required: true
     = ff.input :birth_date, as: :date, start_year: Date.current.year - 100, end_year: Date.current.year, required: true, default: nil, include_blank: true
-    = f.input :tshirt, as: :select, collection: Participant.tshirts.map(&:first)
+    / = f.input :tshirt, as: :select, collection: Participant.tshirts.map(&:first)
     = f.input :delegation_id, as: :select, collection: participant.camp.delegations.order(name: :asc)
-    = ff.input :food_limitations, as: :text, label: 'Tell us if you have any food limitations'
+    / = ff.input :food_limitations, as: :text, label: 'Tell us if you have any food limitations'
     = ff.input :needs_visa, as: :boolean, label: 'I need visa to get to Petrozavodsk'
     .for_visa
       .panel.panel-default

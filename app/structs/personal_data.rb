@@ -3,33 +3,32 @@ class PersonalData < ApplicationStruct
   include ActiveModel::Dirty
 
   def self.attributes
-    @attributes ||= [:passport_number,
-    :passport_issue_date,
-    :passport_expire_date,
-    :first_name,
-    :last_name,
-    :middle_names,
-    :latin_name,
-    :country_permanent,
-    :region_permanent,
-    :address_permanent,
-    :visa_city,
-    :place_of_work,
-    :work_address,
-    :occupation,
-    :points_to_visit,
-    :needs_visa,
-    :birth_date,
-    :sex,
-    :citizenship,
-    :birth_country,
-    :birth_place,
-    :passport_issuer,
-    :food_limitations,
-    ].freeze
+    @attributes ||= %i[passport_number
+                       passport_issue_date
+                       passport_expire_date
+                       first_name
+                       last_name
+                       middle_names
+                       latin_name
+                       country_permanent
+                       region_permanent
+                       address_permanent
+                       visa_city
+                       place_of_work
+                       work_address
+                       occupation
+                       points_to_visit
+                       needs_visa
+                       birth_date
+                       sex
+                       citizenship
+                       birth_country
+                       birth_place
+                       passport_issuer
+                       food_limitations].freeze
   end
 
-  attr_accessor *(self.attributes - [:passport_issue_date, :passport_expire_date, :needs_visa, :birth_date])
+  attr_accessor(*(attributes - %i[passport_issue_date passport_expire_date needs_visa birth_date]))
   attribute :passport_issue_date, :date
   attribute :passport_expire_date, :date
   attribute :birth_date, :date
@@ -54,10 +53,10 @@ class PersonalData < ApplicationStruct
     :birth_place,
     :passport_issuer,
     presence: true, if: :needs_visa
-  validates :sex, inclusion: {in: ['male', 'female']}, if: :needs_visa
+  validates :sex, inclusion: { in: %w[male female] }, if: :needs_visa
 
   def attributes
-    self.class.attributes.map{|key| [key, public_send(key)]}.to_h
+    self.class.attributes.map { |key| [key, public_send(key)] }.to_h
   end
 
   def attribute_names

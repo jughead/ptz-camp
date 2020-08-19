@@ -7,6 +7,9 @@ ul
   - @camp.day_schedules.each do |day|
     li = link_to day.date, day.edit_path
 
+h2 Participants CSV
+= link_to 'Download', download_participants_admin_camp_path(@camp)
+
 h2 Food limitations
 
 table.table

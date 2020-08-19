@@ -55,7 +55,7 @@ class Admin::CampsController < Admin::ApplicationController
   def download_participants
     @participants = @camp.participants
     temp_file = Camps::GenerateParticipantsCsvCommand.new(@camp).execute
-    send_file temp_file.path, type: 'text/csv', disposition: 'attachment'
+    send_file temp_file.path, type: 'text/csv', disposition: 'attachment', filename: 'participants.csv'
   end
 
   private

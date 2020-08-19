@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Admin::CampsController < Admin::ApplicationController
   load_and_authorize_resource :camp
 
@@ -51,13 +52,19 @@ class Admin::CampsController < Admin::ApplicationController
     render :badges, layout: 'badges'
   end
 
+  def download_participants
+    @participants = @camp.participants
+    temp_file = Camps::GenerateParticipantsCsvCommand.new(@camp).execute
+    send_file temp_file.path, type: 'text/csv', disposition: 'attachment'
+  end
+
   private
 
-    def update_params
-      params.require(:camp).permit(:title, :slug, :telegram_intro, :front_page, :registration)
-    end
+  def update_params
+    params.require(:camp).permit(:title, :slug, :telegram_intro, :front_page, :registration)
+  end
 
-    def create_params
-      params.require(:camp).permit(:title, :slug, :telegram_intro, :start_date, :finish_date, :front_page)
-    end
+  def create_params
+    params.require(:camp).permit(:title, :slug, :telegram_intro, :start_date, :finish_date, :front_page)
+  end
 end

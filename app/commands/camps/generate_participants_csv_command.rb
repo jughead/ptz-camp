@@ -7,9 +7,9 @@ module Camps
     def execute
       tempfile = Tempfile.new
       CSV.open(tempfile.path, 'w') do |csv|
-        csv << ['Delegation', 'Team', 'Participant email']
-        query.each do |participant|
-          csv << [participant.delegation&.name, participant.team&.name, participant.user&.email]
+        csv << ['Team', 'Participant email']
+        data.each do |team|
+          csv << [team[:name], team[:participant_emails]]
         end
       end
       tempfile
@@ -20,8 +20,17 @@ module Camps
 
     private
 
+    def data
+      query.map do |team|
+        {
+          name: [team.delegation&.name, team.name].compact.join(': '),
+          participant_emails: team.participants.map { |participant| participant&.user&.email }.compact.join(', '),
+        }
+      end
+    end
+
     def query
-      @camp.participants.order(:delegation_id, :team_id).includes(:team, :delegation, :user)
+      @camp.teams.order(:id).includes(:delegation, participants: :user)
     end
   end
 end

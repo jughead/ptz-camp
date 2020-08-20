@@ -1,11 +1,15 @@
+# frozen_string_literal: true
+
 require 'sidekiq/web'
 Sidekiq::Web.disable :sessions
 
 Rails.application.routes.draw do
   devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks',
-    registrations: 'users/registrations',
+    registrations: 'users/registrations'
   }
+
+  get '/health', to: 'admin/readiness#show'
 
   authenticate :user, ->(u) { u.admin? } do
     get :admin, to: 'admin/site#home'

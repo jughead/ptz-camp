@@ -3,6 +3,7 @@ require:
   - rubocop-performance
 
 AllCops:
+  NewCops: enable
   TargetRubyVersion: 2.6
   Exclude:
     - ".git/**/*"
@@ -35,10 +36,10 @@ Style/MixinUsage:
     - "spec/**/*"
 
 Style/TrailingCommaInArrayLiteral:
-  Enabled: false
+  Enabled: true
 
 Style/TrailingCommaInHashLiteral:
-  Enabled: false
+  Enabled: true
 
 Layout/DotPosition:
   EnforcedStyle: trailing
@@ -83,15 +84,13 @@ Metrics/BlockLength:
 Style/ClassAndModuleChildren:
   EnforcedStyle: nested
   AutoCorrect: true
-  Exclude:
-    - "spec/**/*.rb"
-    - "config/environments/development.rb"
-    - "config/environments/production.rb"
-    - "config/environments/test.rb"
+  SafeAutoCorrect: true
+  Enabled: true
 
 Rails/FilePath:
   EnforcedStyle: arguments
 
 Style/FrozenStringLiteralComment:
   Enabled: true
+  Safe: true
   AutoCorrect: true

@@ -4,6 +4,10 @@ require 'sidekiq/web'
 Sidekiq::Web.disable :sessions
 
 Rails.application.routes.draw do
+  match '/(*path)', to: redirect { |_params, req|
+                          "//camp.icpc.petrsu.ru#{req.fullpath}"
+                        }, via: :all, constraints: { host: 'camp.acm.petrsu.ru' }
+
   devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks',
     registrations: 'users/registrations'

@@ -45,7 +45,7 @@ gem 'slim'
 ####################################
 gem 'devise', '~> 4.4.0'
 gem 'omniauth-facebook'
-gem 'omniauth-vkontakte'
+gem 'omniauth-vkontakte', '~> 1.6.1'
 gem 'omniauth-google-oauth2', '~> 0.8.0'
 # Role base authorization
 gem 'rolify'
@@ -93,7 +93,7 @@ group :development do
   gem 'web-console'
   gem 'listen', '~> 3.0.5'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  gem 'spring', '~> 2.1.1'
   gem 'spring-watcher-listen', '~> 2.0.0'
   # Open emails in browser instead of real send
   gem 'letter_opener'

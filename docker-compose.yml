@@ -1,0 +1,80 @@
+version: "3"
+services:
+  db:
+    image: postgres:9.6-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+      PGDATA: /var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+  redis:
+    image: redis:3.2-alpine
+    volumes:
+      - redis_data:/data
+  rails_app: &rails_app # Use same image in web and jobs
+    image: ptz-camp_rails_app:latest
+    build: .
+    env_file:
+      - .env.${RAILS_ENV:-development}
+    environment: &rails_app_environment
+      RAILS_ENV: ${RAILS_ENV:-development}
+      REDIS_URL: redis://redis:6379
+      DATABASE_URL: postgres://root:password@db:5432/
+    tty: true
+    volumes:
+      - ./app:/ptz-camp/app
+      - ./bin:/ptz-camp/bin
+      - ./config:/ptz-camp/config
+      - ./db:/ptz-camp/db
+      - ./lib:/ptz-camp/lib
+      - ./log:/ptz-camp/log
+      - ./public:/ptz-camp/public
+      - ./spec:/ptz-camp/spec
+      - ./test:/ptz-camp/test
+      - ./tmp/letter_opener:/ptz-camp/tmp/letter_opener
+      - ./vendor:/ptz-camp/vendor
+      - ./.env.development:/ptz-camp/.env.development
+      - ./.env.test:/ptz-camp/.env.test
+      - ./Rakefile:/ptz-camp/Rakefile
+      - ./Gemfile.lock:/ptz-camp/Gemfile.lock
+      - ./Gemfile:/ptz-camp/Gemfile
+      - ./config.ru:/ptz-camp/config.ru
+      - ./yarn.lock:/ptz-camp/yarn.lock
+      - ./package.json:/ptz-camp/package.json
+      - ./.ruby-version:/ptz-camp/.ruby-version
+      - ./.nvmrc:/ptz-camp/.nvmrc
+      - ./.postcssrc.yml:/ptz-camp/.postcssrc.yml
+      - ./node_modules:/ptz-camp/node_modules
+      - bundle_cache:/bundle
+      - yarn_cache:/yarn_cache
+    depends_on:
+      - db
+      - redis
+  jobs:
+    <<: *rails_app
+    command: sidekiq
+  web:
+    <<: *rails_app
+    environment:
+      <<: *rails_app_environment
+    # Run "docker attach moteef_web_1" to debug container
+    command: bin/rails s -p 3000 -b '0.0.0.0'
+    ports:
+      - "3000:3000"
+    # stdin_open + tti results in "docker run -it"
+    stdin_open: true
+  email-reader:
+    image: ptz-camp_email-reader:latest
+    build:
+      context: email-reader
+      dockerfile: Dockerfile.local
+    volumes:
+      - ./email-reader/client_secret.json:/app/client_secret.json
+volumes:
+  postgres_data:
+  redis_data:
+  bundle_cache:
+  yarn_cache:

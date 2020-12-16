@@ -19,7 +19,8 @@
     = ff.input :work_address, as: :text
     = ff.input :occupation
     = ff.input :points_to_visit
-  /= f.input :tshirt, as: :select, collection: Participant.tshirts.map(&:first)
+    = ff.input :share_with_partners, as: :radio_buttons, collection: [['Yes', true], ['No', false]], label: 'Share my email with partners of the camp'
+    = f.input :tshirt, as: :select, collection: Participant.tshirts.map(&:first)
   = f.input :delegation_id, as: :select, collection: participant.camp.delegations.order(name: :asc)
   /= f.fields_for :personal, f.object.personal do |ff|
     = ff.input :food_limitations

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PersonalData < ApplicationStruct
   include ActiveModel::Validations
   include ActiveModel::Dirty
@@ -25,17 +27,22 @@ class PersonalData < ApplicationStruct
                        birth_country
                        birth_place
                        passport_issuer
-                       food_limitations].freeze
+                       food_limitations
+                       share_with_partners].freeze
   end
 
-  attr_accessor(*(attributes - %i[passport_issue_date passport_expire_date needs_visa birth_date]))
+  attr_accessor(*(attributes - %i[passport_issue_date passport_expire_date needs_visa birth_date share_with_partners]))
+
   attribute :passport_issue_date, :date
   attribute :passport_expire_date, :date
   attribute :birth_date, :date
   attribute :needs_visa, :boolean
+  attribute :share_with_partners, :boolean
 
   validates :first_name, :last_name, presence: true
-  validates :birth_date, presence: true, on: :user
+  validates :birth_date, presence: true
+  validate :validate_birth_date_beginning
+  validate :validate_share_with_partners
 
   validates :passport_number,
     :passport_issue_date,
@@ -61,5 +68,24 @@ class PersonalData < ApplicationStruct
 
   def attribute_names
     self.class.attributes
+  end
+
+  def valid?(*args)
+    puts "Valid called with: #{args}"
+    super
+  end
+
+  private
+
+  def validate_birth_date_beginning
+    return unless birth_date
+
+    errors.add(:birth_date, :young) if birth_date > Date.parse('2005-12-31')
+  end
+
+  def validate_share_with_partners
+    return unless share_with_partners.nil?
+
+    errors.add(:share_with_partners, :blank)
   end
 end

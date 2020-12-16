@@ -1,0 +1,8 @@
+en:
+  activemodel:
+    errors:
+      models:
+        personal_data:
+          attributes:
+            birth_date:
+              young: The registration is allowed for participants over 16 years old

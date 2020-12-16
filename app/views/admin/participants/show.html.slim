@@ -1,3 +1,13 @@
+ruby:
+  share_with_partners = case @participant.personal.share_with_partners
+    when nil
+      'Unknown'
+    when true
+      'Yes'
+    when false
+      'No'
+    end
+
 = link_to 'Back to participants', [:admin, @camp, :participants]
 
 h2
@@ -13,6 +23,8 @@ dl
   - %i(first_name last_name middle_names latin_name birth_date sex citizenship birth_country birth_place country_permanent region_permanent visa_city place_of_work work_address address_permanent passport_number passport_issue_date passport_expire_date passport_issuer food_limitations points_to_visit).each do |key|
     dt = key.to_s.humanize
     dd = @participant.personal.public_send(key)
+  dt Allows to share their email with partners
+  dd = share_with_partners
   dt Arrival/Departure dates
   dd = "#{@participant.arrival} - #{@participant.departure}"
   dt Passport scan

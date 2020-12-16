@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Participant < ApplicationRecord
   belongs_to :camp
   belongs_to :delegation
@@ -12,7 +14,7 @@ class Participant < ApplicationRecord
 
   validates :user, presence: true, on: :user
   validates :name, presence: true
-  # validates :tshirt, presence: true
+  validates :tshirt, presence: true
   validates :delegation, presence: true
   validates :delegation_id, presence: true
   validates :camp, presence: true

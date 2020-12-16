@@ -122,7 +122,7 @@ GEM
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
-    json (2.1.0)
+    json (2.4.0)
     jsonapi-renderer (0.2.0)
     jwt (2.2.1)
     launchy (2.4.3)

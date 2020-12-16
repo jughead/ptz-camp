@@ -45,7 +45,7 @@ gem 'slim'
 ####################################
 gem 'devise', '~> 4.4.0'
 gem 'omniauth-facebook'
-gem 'omniauth-vkontakte'
+gem 'omniauth-vkontakte', '~> 1.6.1'
 gem 'omniauth-google-oauth2', '~> 0.8.0'
 # Role base authorization
 gem 'rolify'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Team < ApplicationRecord
   belongs_to :camp
   belongs_to :delegation
@@ -17,7 +19,6 @@ class Team < ApplicationRecord
     id = @@flag_counter
     @@flag_counter += 1
     define_method "#{name}=" do |value|
-      puts "1" * 42
       if value == 'true' || value == '1'
         set_flag(id)
       else

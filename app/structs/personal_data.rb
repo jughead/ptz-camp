@@ -80,7 +80,7 @@ class PersonalData < ApplicationStruct
   def validate_birth_date_beginning
     return unless birth_date
 
-    errors.add(:birth_date, :young) if birth_date > Date.parse('2005-12-31')
+    errors.add(:birth_date, :young) if birth_date > Date.parse('2010-12-31')
   end
 
   def validate_share_with_partners

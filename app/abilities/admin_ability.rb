@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AdminAbility
   include CanCan::Ability
 
@@ -29,7 +31,7 @@ class AdminAbility
   end
 
   def camp_rules
-    can %i[index badges show new edit create update dashboard download_participants], Camp
+    can %i[index badges show new edit create update dashboard download_participants download_teams], Camp
   end
 
   def delegation_rules

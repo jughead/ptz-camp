@@ -26,6 +26,7 @@ Rails.application.routes.draw do
           get :dashboard
           get :badges
           get :download_participants
+          get :download_teams
         end
         resources :delegations do
           collection do

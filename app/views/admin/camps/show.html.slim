@@ -8,7 +8,10 @@ ul
     li = link_to day.date, day.edit_path
 
 h2 Participants CSV
-= link_to 'Download', download_participants_admin_camp_path(@camp)
+p
+  = link_to 'Download teams', download_teams_admin_camp_path(@camp)
+p
+  = link_to 'Download participants with delegation and birth date', download_participants_admin_camp_path(@camp, columns: 'delegation,last_first_names,birth_date')
 
 h2 Food limitations
 

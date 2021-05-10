@@ -28,7 +28,7 @@ gem 'puma', '~> 4.0'
 # Font Awesome
 # gem 'font-awesome-rails'
 # gem 'non-stupid-digest-assets'
-gem 'webpacker'
+gem 'webpacker', '~> 3.6.0'
 
 ########################
 # Template extensions

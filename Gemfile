@@ -43,7 +43,7 @@ gem 'slim'
 ####################################
 # Authentication, authorization, etc
 ####################################
-gem 'devise', '~> 4.4.0'
+gem 'devise', '~> 4.7.1'
 gem 'omniauth-facebook'
 gem 'omniauth-vkontakte', '~> 1.6.1'
 gem 'omniauth-google-oauth2', '~> 0.8.0'

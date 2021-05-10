@@ -1,4 +1,4 @@
-FROM ruby:2.6.6-slim-stretch
+FROM ruby:2.6.7-slim-stretch
 ARG PACKAGES="build-essential libpq-dev curl git"
 RUN apt-get update && \
     apt-get upgrade -y && \
@@ -21,6 +21,6 @@ ENV BUNDLE_PATH=/bundle \
     YARN_CACHE_FOLDER=/yarn_cache
 ENV PATH="$BUNDLE_BIN:$PATH"
 
-RUN gem install bundler -v 2.1.4
+RUN gem install bundler -v 2.2.16
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
